@@ -1,0 +1,2772 @@
+
+\documentclass[a4paper, 12pt]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%Paquetes
+\usepackage[spanish]{babel}  
+\usepackage{indentfirst} %%%%%%%%%%%%%%%%Crear un indent al principio
+\usepackage[latin1]{inputenc}%%%%%%%%%%%%ñ y acentos
+\usepackage{amstext}%%%%%%%%
+\usepackage{amsfonts}%%%%%%%
+\usepackage{amssymb}%%%%%%%% AMSLaTeX
+\usepackage{amscd}%%%%%%%%%%
+\usepackage{amsmath}%%%%%%%%
+\usepackage{enumerate}%%%%%%%%%%%%%%%%Mejoras del entorno enumerate
+\usepackage[all]{xy}
+\usepackage{latexsym}
+\usepackage{color}
+\usepackage[mathcal]{eucal}%%%%%%%Caligrafica matematica
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{tcolorbox}
+\usepackage{stmaryrd}
+\usepackage{setspace}
+\onehalfspacing
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%Teoremas
+\newtheorem{teo}{Teorema}[section]%%%%%%%%% Teorema
+\newtheorem{defi}{Definición}[section]%%%%%%%% Definicion
+\newtheorem{lema}[teo]{Lema}%%%%%%%%%%%%% Lema
+\newtheorem{propo}[teo]{Proposición}%%%%%%%% Proposicion
+\newtheorem{cor}[teo]{Corolario}%%%%%%%%%%%Corolario
+\newtheorem{pro1}{Problema}%[chapter]%%%%%%%%%Problema
+\newenvironment{pro}{\begin{pro1} \sf \small} {\end{pro1}}
+\newtheorem{*pro1}[pro1]{* Problema}%%%%%%%%%%Problema complicado
+\newenvironment{*pro}{\begin{*pro1} \sf} {\end{*pro1}}
+\newcommand{\escalar}[2]{\left\langle\, #1,#2\, \right\rangle}  %%%Producto escalar 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%Comandos
+\newcommand{\dem}{\noindent\textbf{Demostración. }\vspace{0.3 cm}}%%Demostracion
+\newcommand{\R}{\mathbb{R}}%%%%%%%%%%%%Numeros reales
+\newcommand{\F}{\mathbb{F}}%%%%%%%%%%%%Cuerpo
+\newcommand{\C}{\mathbb{C}}%%%%%%%%%%%%Numeros complejos
+\newcommand{\Q}{\mathbb{Q}}%%%%%%%%%%%%Numeros racionales
+\newcommand{\N}{\mathbb{N}}%%%%%%%%%%%%Numeros naturales
+\newcommand{\Z}{\mathbb{Z}}%%%%%%%%%%%%Numeros enteros
+\newcommand{\g}{\mathfrak{g}}%%%%%%%%%%%%Algebra de Lie del grupo G
+\newcommand{\V}{\mathcal{V}}%%%%%%%%%%%%Variedad
+\newcommand{\W}{\mathcal{W}}%%%%%%%%%%%%Variedad
+\newcommand{\coZ}{Z}%%%%
+\newcommand{\coB}{B}%%%%  Cohomologia
+\newcommand{\coH}{H}%%%%
+\newcommand{\h}{\mathcal{H}}%%%%%%%%%%%%Algebra de Lie del grupo H
+\newcommand{\fin}{ $\Box $ \vspace{0.4 cm}}
+\newcommand{\p}{\mathfrak{p}}%%%%%%%% Ideal primo
+\newcommand{\m}{\mathfrak{m}}%%%%%%%% Ideal maximal
+\newcommand{\limind}{\lim_{\longrightarrow} } 
+\newcommand{\gp}{\mathcal{G'}}%%%%%%%%%%%Algebra del grupo G'
+\newcommand{\lto}{\longrightarrow}%%%%%%Simplificacion de la flecha larga
+\newcommand{\wa}{\omega_2} %%%%%%%%%%%forma simplectica
+\newcommand{\Wa}{\Omega_2} %%%%%%%%%% forma simplectica lineal
+\newcommand{\lag}{\lambda_g}%%%%%%%%%%%%Traslacion a la izquierda
+\newcommand{\rg}{\rho_g}%%%%%%%%%%%%%%%%Traslacion a la derecha
+\newcommand{\Gr}{\boldsymbol{G}}%%%%%%%%%%Recubridor universal
+\newcommand{\norma}[1]{\: \parallel #1 \!\parallel\! }%%%Norma de un vector
+\newcommand{\abs}[1]{\left|\, #1 \right|}  %%%Valor absoluto 
+\newcommand{\Pro}{\mathbb{P}}%%%%%%Espacio proyectivo
+\newcommand{\Problemas}{\newpage  \begin{center}{\Huge Problemas}\end{center}}
+\newcommand{\Ejemplos}{\vspace{0.5 cm} {\bf Ejemplos}}
+\newcommand{\cpt}{\textit{cpt}}  %%%%%Casi por todo
+\newcommand{\campos}{\mathfrak{X} } %%%% Campos en una variedad
+\newcommand{\kulkarni}{\varowedge}   %%%producto de Kulkarni
+\newcommand{\traza}{\mathrm{Tr}}  %%% Traza
+\newcommand{\WS}{W\!\!S}
+\renewcommand{\to}{\lto}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%Operadores
+\DeclareMathOperator{\End}{End}%%%%%%%%%%Endomorfismo
+\DeclareMathOperator{\Ad}{Ad}%%%%%%%%%%Adjunta
+\DeclareMathOperator{\grad}{grad}%%%%%%%%%%Graciente
+\DeclareMathOperator{\Dif}{Dif}%%%%%%%%%%Diferenciales
+\DeclareMathOperator{\sop}{sop}%%%%%%%%%Soporte
+\DeclareMathOperator{\distancia}{d}%%%%%%%%Distancia
+\DeclareMathOperator{\sen}{sen}%%%%%%%%%%Seno español
+\DeclareMathOperator{\Der}{Der}%%%%%%%%%%Derivaciones
+\DeclareMathOperator{\rang}{rang}%%%%%%%%Rango
+\DeclareMathOperator{\Hom}{Hom}%%%%%%Homomorfismos
+\DeclareMathOperator{\Ann}{Ann}%%%%%%%Anulador
+\DeclareMathOperator{\Img}{Im} %%%%Parte imaginaria
+\DeclareMathOperator{\rad}{rad}%%%%%%%%Radical
+\DeclareMathOperator{\Ker}{Ker}%%%%%%%Nucleo
+\DeclareMathOperator{\Id}{Id}%%%%%%% Identidad
+\DeclareMathOperator{\GL}{GL}%%%%%%%%%Grupo lineal
+\DeclareMathOperator{\Apli}{Apli}%%%%%%Aplicaciones
+\DeclareMathOperator{\Bil}{Bil}%%%%%Bilineales
+\DeclareMathOperator{\Spec}{Spec}%%%%Espectro
+\DeclareMathOperator{\Ob}{Ob}  %%% Objetos de una categoría
+\DeclareMathOperator{\Tor}{Tor}%%%%%Torsion de una conexión lineal
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%
+\title{Tensor de Weyl}
+\author{José Luis Tábara}
+\date{jltabara@gmail.com}
+%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
+
+\vspace{-1cm}
+\maketitle
+
+\end{tcolorbox}
+
+\thispagestyle{empty}
+
+\tableofcontents
+
+\newpage
+
+
+\section{Tensor de curvatura}
+
+
+
+
+Una {\sf isometría}\index{isometría} entre dos variedades riemannianas $(\V, g)$ y $(\V',g')$ es un difeomorfismo $\varphi: \V \rightarrow \V'$ que cumple $\varphi^*(g')=g$.  Las isometrías entre abiertos de las variedades se llaman \index{isometría!local}{\sf isometrías locales}.  Decimos que dos puntos, $p \in V$ y $p' \in \V'$ son {\sf isométricos},\index{puntos isométricos} si existe una isometría local $\varphi: U \rightarrow U'$ que verifica $\varphi(p)=p'$. El estudio del problema de la isometría entre dos puntos conduce directamente al estudio del concepto de curvatura, tal como expuso Riemann en su memoria de habilitación. El desarrollo de esta idea, expresada en lenguaje moderno, puede encontrarse en el volumen $2$ de \cite{spiaco} (pág. $183$).
+
+
+\bigskip
+
+Existen distintos tipos de curvatura (media, seccional, de Gauss...) tanto en superficies como en variedades de mayor dimensión.  Sin embargo todas ellas se pueden deducir a partir de un único objeto:  el tensor de curvatura.
+
+Existen diversos métodos para introducir el tensor de curvatura.  El que nosotros emplearemos se basa en la ausencia de conmutatividad de las derivadas covariantes de segundo grado.  El principal inconveniente de este método es que oculta gran parte de la geometría implícita en el tensor de curvatura, pero tiene la ventaja de ser un método simple y rápido.
+
+
+
+\begin{defi}
+
+Sea $\V$ una variedad y $\nabla$ una conexión.  La aplicación
+$$
+R: \campos (\V) \times \campos(\V) \times \campos (\V)  \lto  \campos(\V)
+$$
+dada por $R(X,Y,Z) = \nabla_X \nabla_Y Z - \nabla_Y \nabla_X Z - \nabla_{[X,Y]} Z$,   
+se denomina \index{tensor!de curvatura}{\sf tensor de curvatura}\footnote{En algunas referencias (por ejemplo \cite{carrie} y \cite{galrie}) se define el tensor de curvatura con el signo contrario.  Debemos tener cuidado con el convenio utilizado en cada libro.}.
+
+\end{defi}
+
+\noindent{\bf Observación.}
+
+\smallskip
+
+El tensor de curvatura puede definirse en cualquier variedad dotada de una conexión lineal, no siendo necesario que exista una estructura riemanniana.  Sin embargo, en toda variedad riemanniana $(\V, g)$ existe una única conexión, llamada \index{conexión!de Levi-Civita}{\sf conexión de Levi-Civita}, o \index{conexión!riemanniana}{\sf conexión riemanniana},  que es simétrica y cumple $\nabla g=0$.  Siempre que tengamos una variedad riemanniana consideraremos en ella la conexión de Levi-Civita asociada.
+
+
+
+\begin{propo}[\normalfont \cite{leerie}, capítulo $7$]
+
+El tensor de curvatura $R$ es lineal en cada variable. 
+
+\end{propo}
+
+\dem
+
+
+
+
+La aditividad en cada variable es  clara.  Veamos entonces la linealidad en la primera componente.
+\begin{equation*}
+\begin{split}
+R(fX,Y,Z)= \nabla_{fX}\nabla_YZ - \nabla_Y \nabla_{fX}Z - \nabla_{[fX,Y]}Z = \\
+f\nabla_X\nabla_Y Z - Y(f) \nabla_X Z -f\nabla_Y \nabla_X Z + Y(f) \nabla_XZ -f\nabla_{[X,Y]} Z = \\
+f(\nabla_X \nabla_Y Z - \nabla_Y \nabla_X Z - \nabla_{[X,Y]}Z) = f R(X,Y,Z)
+\end{split}
+\end{equation*}
+
+
+La aplicación $R$ es antisimétrica en las dos primeras variables ($R(X,Y,Z) =-R(Y,X,Z)$ para todo campo~$Z$).
+La linealidad en la segunda componente es consecuencia directa de esta antisimetría.
+
+\smallskip
+
+La linealidad en la tercera componente es más tediosa de deducir, aunque no es complicada.
+\begin{equation*}
+\begin{split}
+R(X,Y,fZ) = \nabla_X \nabla_Y(fZ) - \nabla_Y\nabla_X(fZ)-\nabla_{[X,Y]}(fZ) = \\
+\nabla_X(Y(f)Z+f\nabla_YZ) -\nabla_Y(X(f)Z+f\nabla_XZ)-[X,Y](f) Z - f \nabla_{[X,Y]} Z = \\
+XY(f)Z+Y(f)\nabla_XZ + X(f)\nabla_YZ+f\nabla_X \nabla_YZ \\
+-YX(f)Z-X(f) \nabla_Y Z - Y(f) \nabla_XZ - f \nabla_Y\nabla_X Z \\
+-XY(f)Z+YX(f)Z-f\nabla_{[X,Y]}Z
+\end{split}
+\end{equation*}
+
+
+Todos los términos que no están multiplicados por $f$ se anulan por pares obteniéndose
+$$
+f(\nabla_X\nabla_Y Z -\nabla_Y \nabla_X Z - \nabla_{[X,Y]} Z ) = f R(X,Y,Z)
+$$
+La aplicación es lineal en las tres variables. \fin
+
+
+Una vez demostrada esta proposición ya podemos afirmar que $R$ es  un tensor de tipo $(3,1)$. Una de las primeras consecuencias que se deduce de este hecho es que el valor del tensor en un punto depende solo y exclusivamente del valor de los campos en dicho punto
+$$
+R(X,Y,Z)_p= R_p(X_p,Y_p,Z_p)
+$$
+De este modo, para hacer el cálculo en un punto, debemos extender cada uno de los vectores de forma arbitraria.  Resulta que cada uno de los sumandos que definen el tensor de curvatura si dependen de la extensión, pero  la operación total es independiente de dicha extensión.
+
+\bigskip
+
+Fijadas las dos primeras variables, el resultado es una aplicación lineal del módulo $\campos(\V)$
+$$
+R(X,Y)Z=R(X,Y,Z)
+$$
+
+Construimos una aplicación bilineal
+$$
+\begin{array}{lccc}
+R: & \campos (\V) \times \campos(\V) & \lto & \End(\campos(\V)) \\
+  & (X,Y) & \lto& R(X,Y)
+\end{array}
+$$
+
+Decimos que $R(X,Y)$ es el \index{operador de curvatura}{\sf operador de curvatura} asociado a  $X$ e~$Y$. De nuevo todos los cálculos se pueden efectuar punto a punto y a cada par de vectores   $x$~e $y$ en $p$ se le asocia un endomorfismo del espacio tangente.  
+
+\bigskip
+
+Sea $Z$ un campo vectorial. $\nabla Z$ es un tensor de tipo $(1,1)$.  La derivada covariante de $\nabla Z$ la denotamos $\nabla^2 Z$ y es un tensor de tipo $(2,1)$.  El campo vectorial $\nabla^2 Z(X,Y)$ lo denotaremos por $\nabla^2_{X,Y}(Z)$ y diremos que es la derivada (covariante) segunda de $Z$ respecto de los campos $X$ e $Y$.
+
+\begin{propo}[\normalfont \cite{galrie}, pág. 107]\label{propo:derivadasegunda}
+
+Si la conexión no tiene torsión, se cumple 
+$$
+\nabla^2_{X,Y}(Z)- \nabla^2_{Y,X}(Z)= -R(X,Y,Z)
+$$
+
+\end{propo}
+
+
+\dem
+
+Aplicamos la definición de derivada covariante de un tensor
+\begin{equation*}
+\begin{split}
+\nabla(\nabla Z)(X,Y)=(\nabla_Y(\nabla Z))(X)=\\
+\nabla_Y(\nabla(Z)(X))- \nabla (Z)(\nabla_Y X)= \\
+\nabla_Y \nabla_X Z- \nabla_{\nabla_Y X}Z
+\end{split}
+\end{equation*}
+
+Como la torsión es nula $\nabla_X Y - \nabla_Y X= [X,Y]$. De estas dos propiedades se tiene la identidad pedida. \fin
+
+\noindent{\bf Observación.}
+
+\smallskip
+
+El signo menos procede de nuestra elección del tensor de curvatura.  Esta propiedad  lleva a muchos autores a definir el tensor de curvatura con el signo contrario al nuestro.
+
+\bigskip
+
+
+
+En el caso riemanniano existe todavía otra interpretación del tensor de curvatura. Sea $(\V,g)$ riemanniana.  Asociado al tensor $R$ de tipo $(3,1)$, existe un tensor de tipo $(4,0)$
+  $$
+  R(X,Y,Z,A) = g(R(X,Y,Z),A)
+  $$
+
+  
+  
+\noindent{\bf Ejemplos.}
+
+
+\begin{itemize}
+
+\item En $\R^n$ con la conexión standard tenemos 
+$$
+\nabla_X \nabla_Y Z= X(Y(Z))
+$$
+En este caso el tensor de curvatura es nulo.
+
+\item Sean $(\V_1, g_1)$ y $(\V_2,g_2)$ dos variedades riemannianas.  El tensor de curvatura del producto de estas variedades es igual a la suma de los tensores de curvatura 
+$$
+R_{\V_1 \times \V_2}= R_{\V_1} + R_{\V_2}
+$$
+
+Esto se debe  a que $\nabla_X Y=0$ si $X$ e $Y$ son campos de distintas variedades.
+
+\item En una base coordenada el último sumando del tensor de curvatura es nulo.  Si es necesario, podemos realizar cálculos utilizando campos coordenados, en los que la expresión del tensor de curvatura es 
+$$
+R(\partial_i, \partial_j, \partial_k)= \nabla_{\partial_i}\nabla_{\partial_j} \partial_k - \nabla_{\partial_j}\nabla_{\partial_i} \partial_k
+$$
+En este caso se ve claramente como el tensor de curvatura es una medida de la falta de conmutatividad de las derivadas segundas.
+
+\item Si fijamos unas coordenadas locales, la métrica y la conexión se expresan  mediante las fórmulas
+\begin{eqnarray*}
+g & = & g_{ij}\, dx_i \otimes dx_j\\
+\nabla_{\partial_i}\partial_j & = & \Gamma_{ij}^k\, \partial_k 
+\end{eqnarray*}
+En estas mismas coordenadas el tensor de curvatura se escribe como
+$$
+R= R_{ijk}^l\, dx_i \otimes dx_j \otimes dx_k \otimes \partial_l
+$$
+Tras unos  cálculos tenemos
+$$
+R_{ijk}^l= \partial_i\, \Gamma_{jk}^l -\partial_j\,\Gamma_{ik}^l+ \sum_r(\Gamma_{jk}^r\Gamma_{ir}^l -\Gamma_{ik}^r\Gamma_{jr}^l)
+$$
+El tensor de curvatura se obtiene a partir de las derivadas primeras y segundas de la métrica (recordar que los símbolos de Cristoffel se obtienen a partir de las derivadas primeras).
+
+
+\item  En una variedad riemanniana los símbolos de Christoffel se calculan con la fórmula (\cite{leerie}, pág. $69$)
+$$
+\Gamma_{ij}^k=\frac{1}{2}g^{kl}(g_{il,j}+g_{jl,i}-g_{ij,l})
+$$
+donde la coma indica una derivada parcial.  Dado un punto $p_0$ de la variedad, existe un sistema de coordenadas normales (\cite{leerie}, pág. 78) centrado en dicho punto.  En estas coordenadas tenemos que
+$$
+g_{ij}(p_0)=\delta_{ij}, \quad \Gamma_{ij}^k(p_0)=0
+$$
+Expresando el tensor de curvatura en función\label{ejemplo:normales} de la métrica
+\begin{equation*}
+\begin{split}
+R_{ijkl}= R_{ijk}^l= \partial_i \Gamma_{jk}^l-\partial_j \Gamma_{ik}^l = \\
+\frac{1}{2}( g_{jl,ik}+g_{kl,ij}-g_{jk,il}-g_{il,jk}-g_{kl,ij}+g_{ik,jl})=\\
+\frac{1}{2}( g_{jl,ik}+g_{ik,jl}-g_{jk,il}-g_{il,jk})
+\end{split}
+\end{equation*}
+expresión que solamente es válida en el punto $p_0$ y no en el entorno normal.  Esta expresión guarda una gran analogía formal con el producto de Kulkarni (ver sección \ref{sec:productokulkarni}).
+
+
+
+\end{itemize}  
+
+\section{Simetrías del tensor de curvatura}
+
+Todas y cada una de las propiedades que enunciaremos en esta sección se deducen por simple cálculo.   Sin embargo algunas se cumplen para una conexión arbitraria, otras para conexiones de torsión nula y otras en el caso riemanniano.  Aunque nosotros solo utilizaremos las propiedades en el caso riemanniano, es útil saber cual es la característica fundamental que se utiliza en su demostración. La referencia  de esta sección es el capítulo $7$ de \cite{leerie}.
+
+
+ 
+
+\begin{propo}
+
+Sea $\V$ una variedad y $\nabla$ una conexión arbitraria. 
+$$
+R(X,Y)= -R(Y,X)
+$$
+
+\end{propo}
+
+\dem
+
+Cada sumando cambia de signo al permutar dichas variables.  \fin
+
+\begin{propo}[Identidad de \index{identidad!de Bianchi} Bianchi]
+
+
+Si $\nabla$ es una conexión de torsión nula 
+$$
+R(X,Y,Z)+ R(Y,Z,X)+R(Z,X,Y)=0
+$$
+
+\end{propo}
+
+\dem
+
+Desarrollamos la expresión utilizando la definición
+\begin{equation*}
+\begin{split}
+R(X,Y,Z)+ R(Y,Z,X)+R(Z,X,Y)= \\
++\nabla_X \nabla_Y Z - \nabla_Y\nabla_X Z - \nabla_{[X,Y]} Z  \\
++\nabla_Y \nabla_Z X - \nabla_Z \nabla_Y X - \nabla_{[Y,Z]} X\\
++\nabla_Z \nabla_X Y - \nabla_X \nabla_Z Y - \nabla_{[Z,X]} Y
+\end{split}
+\end{equation*}
+
+Aplicando que la torsión es nula obtenemos
+\begin{equation*}
+\begin{split}
+\nabla_X([Y,Z]) + \nabla_Y([Z,X]) + \nabla_Z ([X,Y])\\ - \nabla_{[X,Y]}Z -\nabla_{[Y,Z]}X -\nabla_{[Z,X]}Y =\\
+[X,[Y,Z]]+ [Y,[Z,X]]+[Z,[X,Y]]
+\end{split}
+\end{equation*}
+que es nulo en virtud de la identidad de Jacobi.  \fin
+
+
+\begin{propo}[Identidad de \index{identidad!de Bianchi diferencial}Bianchi diferencial]
+
+
+Sea $\nabla$ una cone\-xión de torsión nula.  Para cualesquiera cuatro campos se cumple
+$$
+(\nabla_XR)(Y,Z,A)+(\nabla_Y R)(Z,X,A)+(\nabla_ZR)(X,Y,A)=0
+$$
+
+\end{propo}
+
+\dem
+
+Podemos suponer, sin pérdida de generalidad, que los cuatro campos conmutan entre si.  Si es cierta la identidad para campos que conmutan, es cierta para cualquier base coordenada y como la identidad implica solamente tensores, debe ser cierta en general.
+
+\smallskip
+
+
+Aplicando que $\nabla_X$ es una derivación del álgebra tensorial, se deduce fácilmente la siguiente fórmula, que muchas veces se emplea para definir la derivada covariante de tensores
+\begin{equation*}
+\begin{split}
+(\nabla_X R)(Y,Z,A)= \nabla_X(R(Y,Z,A))-R(\nabla_XY, Z, A)\\
+-R(Y,\nabla_XZ,A)-R(Y, Z, \nabla_XA)
+\end{split}
+\end{equation*}
+
+Expresemos la parte izquierda de la identidad utilizando este resultado
+\begin{equation*}
+\begin{split}
+ \nabla_X(R(Y,Z,A))-R(\nabla_XY, Z, A)-R(Y,\nabla_XZ,A)-R(Y, Z, \nabla_XA)\\
+ +\nabla_Y(R(Z,X,A))- R(\nabla_YZ,X,A)-R(Z, \nabla_YX,A)-R(Z,X,\nabla_YA)\\
+ +\nabla_Z(R(X,Y,A))-R(\nabla_ZX,Y,A)-R(X,\nabla_ZY,A)-R(X,Y,\nabla_ZA)
+\end{split}
+\end{equation*}
+
+Las dos columnas centrales se eliminan por pares. Para comprobarlo utilizaremos que la conexión es de torsión nula y el hecho de que los campos conmutan.  Veamos como se elimina el par
+$$
+-R(\nabla_XY,Z,A)-R(Z,\nabla_YX,A)
+$$
+Por la antisimetría en las dos primeras componentes tenemos
+$$
++R(Z, \nabla_XY,A)-R(Z,\nabla_YX,A)
+$$
+Utilizando que la torsión es nula nos queda
+$$
+R(Z, [X,Y],A)
+$$
+que es nulo por serlo el conmutador de $X$ e $Y$.
+
+\smallskip
+
+La expresión de la identidad de Bianchi se reduce a 
+\begin{equation*}
+\begin{split}
+\nabla_X(R(Y,Z,A))-R(Y,Z,\nabla_XA) \\
++\nabla_Y(R(Z,X,A)- R(Z,X,\nabla_YA)\\
++\nabla_Z(R(X,Y,A))-R(X,Y,\nabla_ZA)
+\end{split}
+\end{equation*}
+
+Desarrollamos esta expresión utilizando la definición de tensor de curvatura y teniendo en cuenta que el conmutador es nulo
+\begin{equation*}
+\begin{split}
+\nabla_X\nabla_Y\nabla_Z A -\nabla_X\nabla_Z\nabla_YA - \nabla_Y\nabla_Z\nabla_X A+ \nabla_Z\nabla_Y\nabla_XA \\
++\nabla_Y\nabla_Z\nabla_XA -\nabla_Y\nabla_X\nabla_ZA-\nabla_Z\nabla_X\nabla_Y A + \nabla_X\nabla_Z \nabla_YA\\
++\nabla_Z\nabla_X\nabla_YA-\nabla_Z\nabla_Y\nabla_XA-\nabla_X\nabla_Y\nabla_ZA+\nabla_Y\nabla_X\nabla_Z A
+\end{split}
+\end{equation*}
+que se eliminan por pares directamente. \fin
+
+\noindent{\bf Observación.}
+
+\smallskip
+
+Podemos entender $\nabla_X$ como un operador que transforma tensores en tensores.  El conmutador de dos de estos operadores,  da lugar a otro operador. Si no hubiesemos hecho la hipótesis de que los campos conmutan, la demostración de la identidad de Bianchi se reduce a la comprobación de que los operadores del tipo $\nabla_X$ satisfacen la identidad de Jacobi. 
+
+\bigskip
+
+Enunciada para el caso del operador de curvatura, se traduce en 
+$$
+(\nabla_XR)(Y,Z)+(\nabla_YR)(Z,X)+(\nabla_ZR)(X,Y)=0
+$$
+
+\bigskip
+
+ Pasemos ya al caso riemanniano
+
+\begin{propo}\label{propo:simetria}
+
+Sea $\nabla$ una conexión riemanniana.  Se cumple
+\begin{enumerate}[\indent 1.- ]
+
+\item $R(X,Y,Z,A)= -R(X,Y,A,Z) $
+
+\item $R(X,Y,Z,A)= R(Z,A,X,Y)$
+
+\end{enumerate}
+
+\end{propo}
+
+\dem
+
+{\it 1.-} La antisimetría en los dos últimos indices es equivalente a que se cumpla $R(X,Y,Z,Z)=0$.  Para obtener la antisimetría a partir de esta propiedad debemos polarizarla.  Recordemos que polarizar consiste en desarrollar la expresión
+$$
+R(X,Y,Z+A,Z+A)=0
+$$
+Comprobemos entonces que $R(X,Y,Z,Z)=0$. Aplicando que la conexión conserva el producto escalar tenemos
+\begin{eqnarray*}
+XY\escalar{Z}{Z}  =& X(2 \escalar{\nabla_YZ}{Z}) &=  2 \escalar{\nabla_X\nabla_Y Z}{Z} +2 \escalar{\nabla_YZ}{\nabla_XZ} \\
+YX\escalar{Z}{Z} = & Y(2\escalar{\nabla_X Z}{Z}) & = 2 \escalar{\nabla_Y\nabla_X Z}{Z} +2\escalar{\nabla_XZ}{\nabla_YZ} \\ 
+\left[X,Y\right]\escalar{Z}{Z} = & \dots & = 2 \escalar{\nabla_{[X,Y]} Z}{Z}
+\end{eqnarray*}
+
+Si a la primera ecuación le restamos la segunda y la tercera, en la parte izquierda obtenemos cero, por definición de corchete de Lie.  En la parte de la derecha dos términos se eliminan.  Finalmente nos queda
+$$
+0=2\left(\escalar{\nabla_X\nabla_Y Z}{Z}-\escalar{\nabla_Y\nabla_X Z}{Z}-\escalar{\nabla_{[X,Y]} Z}{Z}\right)= 2 R(X,Y,Z,Z)
+$$
+que es lo que pretendíamos demostrar. 
+\bigskip
+
+{\it 2.- }  La identidad de Bianchi nos da en el caso riemaniano las siguientes ecuaciones
+\begin{eqnarray*}
+R(X,Y,Z,A) +R(Y,Z,X,A)+R(Z,X,Y,A)=0 \\
+R(Y,Z,A,X) +R(Z,A,Y,X)+R(A,Y,Z,X)=0 \\
+R(Z,A,X,Y) +R(A,X,Z,Y)+R(X,Z,A,Y)=0 \\
+R(A,X,Y,Z) +R(X,Y,A,Z)+R(Y,A,X,Z)=0
+\end{eqnarray*}
+
+Sumamos las cuatro ecuaciones y aplicando la antisimetría en las dos últi\-mas variables se cancelan las dos primeras columnas.  Si ahora aplicamos la simetría tanto en las dos primeras variables  como en las dos últimas obtenemos
+$$
+ 2R(Z,X,Y,A)-2R(Y,A,Z,X)=0
+$$
+de donde concluimos. \fin
+
+Clásicamente estas propiedades de simetría se estudiaban sobre las componentes del tensor.  Como es habitual denotamos por $R_{ijkl}$ las componentes del tensor de curvatura de  tipo $(4,0)$ en una base cualquiera (no necesariamente coordenada).
+
+\begin{propo}
+
+Las componentes del tensor de curvatura cumplen las siguientes propiedades de simetría:
+
+\begin{enumerate}[\indent 1.- ]
+
+\item $R_{ijkl}=-R_{jikl}$
+
+\item $R_{ijk\alpha}+ R_{jki\alpha} + R_{kij\alpha}=0$
+
+\item $R_{ij\alpha\beta,k}+R_{jk\alpha\beta,i}+R_{ki\alpha\beta,j}$
+
+\item $R_{ijkl}= -R_{ijlk}$
+
+\item $R_{ijkl}= R_{klij}$
+
+\end{enumerate}
+
+\end{propo}
+
+De modo recíproco, si las coordenadas del  tensor de curvatura cumplen estas identidades, entonces el propio tensor de curvatura también las cumple. 
+
+\bigskip
+
+\noindent{\bf Observación.}
+
+\smallskip
+
+ Utilizando la expresión del tensor de curvatura en coordenadas normales (pág. \pageref{ejemplo:normales}) todas estas identidades son  evidentes punto a punto y por lo tanto son ciertas globalmente.
+ 
+
+
+\section{Producto escalar de tensores}
+
+La referencia principal de esta sección es el capítulo II A-IV de \cite{berles}.
+
+\bigskip
+
+Sea $(E,g)$ un espacio euclídeo de dimensión finita.   La \index{polaridad}{\sf polaridad}
+$$
+\begin{array}{rccc}
+p : & E &\lto & E^* \\
+     &e & \lto &i_e g
+\end{array}
+$$
+establece un isomorfismo entre el espacio euclídeo y su dual. Esto nos permite identificar vectores y formas lineales.  Generalizando este resultado podemos establecer isomorfismos canónicos entre los espacios de tensores $T_i^j(E)$ y $T_k^l(E)$ siempre que $i+j=k+l$. Si utilizamos coordenadas estos isomorfismos se construyen \guillemotleft subiendo\guillemotright \ y \guillemotleft bajando\guillemotright\  índices.
+
+\begin{itemize}
+
+
+
+\item Como $T_i^j(E)$ es isomorfo a $T_{i+j}^0$, en los espacios euclídeos se suelen estudiar únicamente tensores contravariantes.  
+
+
+\item Teniendo en cuenta que en cualquier espacio vectorial se tiene la identificación $(T_r^0(E))^*\sim T_0^r(E)$, el isomorfismo que generaliza a la polaridad
+$$
+p\otimes \cdots \otimes p: T_r^0(E) \lto T_0^r(E)
+$$
+establece un isomorfismo de un espacio vectorial, en este caso $T_r^0(E)$, con su dual.  Esto da lugar a una aplicación bilineal simétrica  en dicho espacio vectorial, que seguiremos denotando por $g$.  Veamos que esta forma bilineal  es definido positiva.  Para cualquier conjunto de vectores
+\begin{equation*}
+\begin{split}
+\big(p\otimes \cdots \otimes p\,(e_1 \otimes \cdots \otimes e_r)\big)(e_1 \otimes \cdots \otimes e_r)=\\ p(e_1)(e_1) \cdots p(e_r)(e_r) =g(e_1,e_1) \cdots g(e_r,e_r)
+\end{split}
+\end{equation*}
+Si tomamos una base ortonormal, observamos que la base construida con productos tensoriales es también ortonormal,  lo que implica que la aplicación bilineal es definido positiva.
+ De este modo, todo espacio de tensores sobre un espacio euclídeo es de nuevo un espacio euclídeo.
+
+
+
+\item Si $h$ es una forma bilineal, $h \in E^* \otimes E^*$, le podemos hacer corresponder un tensor de tipo $(1,1)$, que seguiremos denotando por $h$.  El conjunto de tensores de tipo $(1,1)$ es isomorfo al espacio vectorial de endomorfismos de $E$.  Definimos la traza de $h$ como la traza de su endomorfismo asociado.  Para calcular dicha traza expresamos la forma bilineal $h$ en una base ortonormal.  La traza de dicha matriz coincide con la traza de la forma bilineal. Si $\{e_i\}$ es una base ortonormal, entonces la traza de $h$ es justamente
+$$
+\traza(h)= h(e_i,e_i)=  h_{ii}
+$$
+Como la traza de una forma bilineal depende del producto euclídeo utilizado, a veces se escribe $\traza_g(h)$ para recalcar este hecho.  
+
+
+
+\item Sean $h$ y $k$ dos  formas bilineales.  Expresamos dichas formas en función de una base ortonormal
+$$
+h=h_{ij} \,e_i \otimes e_j \qquad k=k_{lm} \,e_l \otimes e_m
+$$
+Calculamos el producto escalar de $h$ y $k$  teniendo en cuenta que la base $e_i \otimes e_j$ es ortonormal.
+\begin{equation*}
+\begin{split}
+ \escalar{h}{k}= \escalar{h_{ij}\,e_i \otimes e_j}{k_{lm} \,e_l \otimes e_m}=\\
+ h_{ij}\,k_{lm}\escalar{e_i \otimes e_j}{e_l \otimes e_m}= h_{ij}k_{lm} \delta_{il}\delta_{jm} = h_{ij}\, k_{ij}
+\end{split}
+\end{equation*}
+
+En general, si  $a$ y $b$ son tensores de orden $r$ y los expresamos en una base ortonormal, su producto escalar es
+$$
+\escalar{a}{b}= a_{i_1 \cdots i_r} b_{i_1 \cdots i_r}
+$$
+
+\item Calculemos el producto escalar de una forma bilineal $h$ y la métrica euclídea $g$.  En una base ortonormal la matriz de $g$ es la identidad y obtenemos
+$$
+\escalar{h}{g}= h_{ij}\delta_{ij}= h_{ii}= \traza(h)
+$$
+En el espacio de los tensores de orden dos, el subespacio ortogonal a $g$ es precisamente el formado por las métricas de traza nula.
+
+\item Denotemos por $S^2_0(E)$ el conjunto de tensores simétricos de orden $2$ cuya traza sea nula.  Se tiene la descomposición ortogonal
+$$
+S^2(E)=  S^2_0(E)\perp\R g 
+$$
+Si $h$ es una métrica simétrica entonces 
+$$
+h= \left( h-\frac{\traza(h)}{n} \, g\right)+ \frac{\traza(h)}{n}\, g
+$$
+El primer sumando, que denotaremos $h_0$, es la métrica libre de traza.  Los dos sumandos son  ortogonales respecto al producto escalar del espacio de tensores.
+
+\item En el caso de que el espacio de tensores sea $T_1^1(E)$, existe siempre un producto escalar canónico.  Si $\varphi$ y $\phi$ son endomorfismos, su producto escalar es la traza del endomorfismo composición.
+$$
+\escalar{\varphi}{\phi} = \traza(\varphi\,\phi)
+$$
+En nuestro caso dicho producto coincide con el inducido por $g$. Para verlo, expresamos los endomorfismos en función de una base ortonormal y comparamos la fórmula resultante con la fórmula general del producto escalar de tensores.
+
+
+
+
+\end{itemize}
+
+\noindent{\bf Observación 1.}
+
+\smallskip
+
+ Nosotros consideraremos  a los tensores simétricos y antisimétricos como sub\-espacios del álgebra tensorial.  La métrica en dichos espacios será la restricción de la métrica global.  En algunas referencias, sobre todo en el conjunto de tensores antisimétricos, se introducen otras métricas distintas, construidas a base de determinantes (ver \cite{sinthe} pág. 356).  Dichas métricas y las que nosotros utilizaremos son proporcionales y en esencia son equivalentes.  Debido a la constante de proporcionalidad, algunas fórmulas pueden variar ligeramente de las encontradas en otros textos.
+ 
+ \bigskip
+ 
+ \noindent{\bf Observación 2.}
+ 
+ \smallskip
+ 
+ El método más rápido para introducir estructuras euclídeas en los espacios de tensores (simétricos, antisimétricos o generales) es el siguiente:
+ 
+ Se toma una base ortonormal del espacio.  Con dicha base se realizan productos tensoriales, simétricos o productos exteriores, con lo que se construyen nuevas bases de los espacios de tensores.  Las bases así construidas se toman, por definición, como bases ortonormales, lo que induce una métrica en dichos espacios.  Solamente resta comprobar que si tomamos otra base ortonormal la métrica inducida no cambia.
+ 
+   Debemos tomar precauciones, pues si consideramos a los tensores simétricos y antisimétricos como subespacios del conjunto de todos los tensores, heredan una métrica, que en general no coincide con la inducida con este método.
+ 
+
+\section{Tensores de curvatura algebraicos}
+
+Las referencias fundamentales de esta sección  son el capítulo I-G de \cite{besein}, el capítulo III-K de \cite{galrie}  y el artículo \cite{sinthe}.
+
+\bigskip
+
+El tensor de curvatura de una conexión de Levi-Civita satisface ciertas relaciones de simetría.  Estas relaciones son puramente algebraicas y se pueden estudiar de modo aislado.
+
+\begin{defi}
+
+Un tensor $R$ de tipo $(4,0)$ es un \index{tensor!de curvatura algebraico}{\sf tensor de curvatura (alge\-braico)} si cumple las propiedades:
+
+\begin{enumerate}[\indent a)]
+
+\item $R(x,y,z,a)= -R(y,x,z,a)$
+
+\item $R(x,y,z,a)=-R(x,y,a,z)$
+
+\item $R(x,y,z,a)+ R(y,z,x,a)+ R(z,x,y,a)=0$
+
+
+\end{enumerate}
+
+\end{defi}
+
+La última propiedad se conoce como \index{identidad!de Bianchi}{\sf identidad de Bianchi}. El conjunto de todos los tensores de curvatura del espacio euclídeo $E$ se denota por $\mathcal{C}(E)$ y es un subespacio vectorial del conjunto de todos los tensores de orden~$4$.
+
+
+\begin{propo}\label{propo:simetria4}
+
+Un tensor de curvatura cumple la propiedad
+
+\begin{enumerate}[\indent d) ]
+
+\item $R(x,y,z,a)= R(z,a,x,y)$
+
+\end{enumerate}
+
+\end{propo}
+
+\dem
+
+Idéntica a la segunda parte de la demostración de la proposición \ref{propo:simetria}. \fin 
+
+\begin{propo}
+
+Sea $\V$ una variedad y $R$ un tensor de curvatura algebraico sobre el espacio tangente en $p$.  Existe una métrica riemanniana, definida en un entorno de $p$, tal que su tensor de curvatura coincide con $R$ en el punto $p$.
+
+\end{propo}
+
+\dem
+
+Consultar la sección 1.12 de \cite{gilgeo}. \fin
+
+Esta proposición garantiza que el apelativo de \guillemotleft curvatura\guillemotright\  otorgado a los tensores que hemos definido no es gratuito.
+
+\bigskip
+
+
+\noindent{\bf Ejemplos.}
+
+\begin{itemize}
+
+\item Si denotamos por $R$ al tensor de curvatura de una variedad riemannana, $R_p$ es un tensor de curvatura algebraico para todo punto del espacio.
+
+\item Todo tensor de curvatura cumple la propiedad
+$$
+R(x,y,z,a)+ R(x,z,a,y)+R(x,a,y,z)=0
+$$
+Esta condición es equivalente a la identidad de Bianchi. Se tienen identidades análogas en las otras variables.
+
+\item Denotamos por $R_1$ al tensor de curvatura
+$$
+R_1(x,y,z,a)=g(x,z)g(y,a)-g(y,z)g(x,a)
+$$
+ Si calculamos $R_1(x,y,x,y)$ obtenemos el cuadrado del área del paralelogramo que definen los vectores $x$ e $y$.  Es no nulo si los vectores son independientes.
+
+\end{itemize}
+
+
+%\end{document}
+
+Sea $\bigwedge^2(E)$ el espacio de $2$-vectores sobre $E$.  Los elementos de forma $x\wedge y$ se dice que son \index{tensor!descomponible}{\sf descomponibles}.  El conjunto de $2$-vectores descomponibles genera, como espacio vectorial, $\bigwedge^2(E)$.  A cada tensor de curvatura $R \in \mathcal{C}(E)$ se le puede asociar una forma bilineal sobre el espacio vectorial $\bigwedge^2(E)$, que seguiremos denotando por $R$.  Sobre los vectores descomponibles se define como
+$$
+R( x \wedge y , z \wedge a)= R(x,y,z,a)
+$$
+y se extiende por linealidad al resto del espacio $\bigwedge^2(E)$. Las dos primeras propiedades nos informan de que efecto $R$ está bien definida sobre los $2$-vectores descomponibles.  La propiedad $d)$ se traduce en la simetría de la aplicación bilineal. Hemos probado la 
+
+\begin{propo}
+
+Cada tensor de curvatura $R \in \mathcal{C}(E)$ se puede entender como una forma bilineal simétrica sobre $\bigwedge^2(E)$.  También se puede entender como un endomorfismo autoadjunto del espacio euclídeo $\bigwedge^2(E)$.
+
+\end{propo}
+
+
+
+Denotemos por $S^2(\bigwedge^2(E))$ al conjunto de formas bilineales simétricas sobre el espacio de $2$-vectores.  Cada elemento de este espacio induce un tensor de orden 4 sobre $E$ definiendo
+$$
+h(e_1,e_2,e_3,e_4)= h(e_1 \wedge e_2, e_3 \wedge e_4)
+$$
+Esta correspondencia es inyectiva, por lo que podemos suponer que
+$$
+\textstyle S^2(\bigwedge^2(E)) \subset T_4(E)
+$$
+
+\begin{propo}
+
+Los tensores de $S^2(\bigwedge^2(E))$ son justamente los tensores de orden $4$ que cumplen las propiedades a), b) y d).
+
+\end{propo}
+
+
+\begin{defi}
+
+Llamamos {\sf morfismo de Bianchi} \index{morfismo de Bianchi} a la aplicación
+$$
+\textstyle b: T_4(E) \lto T_4(E)
+$$
+dada por 
+$$
+b(R)(x,y,z,a)= \frac{1}{3}\big(R(x,y,z,a)+R(y,z,x,a)+R(z,x,y,a) \big)
+$$
+
+\end{defi}
+
+Esta aplicación es lineal y cumple $b^2=b$.  Podemos restringir esta aplicación al subespacio $S^2(\bigwedge^2(E))$, dado que si $R$ cumple las  propiedades $a)$, $b)$ y  $d)$, entonces $b(R)$ también las cumple.  
+
+\begin{propo}
+
+Dada la aplicación
+$$
+\textstyle b: S^2(\bigwedge^2(E)) \lto S^2(\bigwedge^2(E))
+$$
+se tiene la descomposición en suma directa
+$$
+\textstyle S^2(\bigwedge^2(E))= \Ker(b) \oplus \mathrm{Im}(b)
+$$
+
+\end{propo}
+
+\dem
+
+Es consecuencia inmediata de la propiedad $b^2=b$. \fin
+
+El conjunto $\Ker(b)$ es justamente $\mathcal{C}(E)$.  Para analizar $\mathrm{Im}(b)$, debemos observar que $b(R)$ es siempre un tensor antisimétrico en las cuatro variables. Demostremos, como ejemplo, la antisimetría de $b(R)$ al realizar una trasposición de las variables $2$ y $3$.
+$$
+b(R)(x,z,y,a)= \frac{1}{3}\big( R(x,z,y,a)+R(z,y,x,a)+ R(y,x,z,a)\big)
+$$
+Aplicando las propiedades de los tensores de curvatura, esta expresión es igual~a
+$$
+\frac{1}{3}\big(-R(z,x,y,a)-R(y,z,x,a)-R(x,y,z,a)\big)= -b(R)(x,y,z,a)
+$$
+El mismo razonamiento es válido para cualquier otra trasposición y por lo tanto para cualquier permutación de las cuatro variables.
+
+Supongamos ahora que $R$  es un elemento de $\bigwedge^4(E)$.  Es claro que $R$ es también un elemento de $S^2(\bigwedge^2(E))$ y además  cumple $b(R)=R$.  Como conclusión extraemos la 
+
+\begin{propo}
+
+Dada la aplicación 
+$$
+\textstyle b: S^2(\bigwedge^2(E)) \lto S^2(\bigwedge^2(E))
+ $$
+  el subespacio $\mathrm{Im}(b)$ es isomorfo a $\bigwedge^4(E)$.  
+
+\end{propo}
+
+Teniendo en mente los isomorfismos anteriores se verifica
+$$
+\textstyle S^2(\bigwedge^2(E))= \mathcal{C}(E) \oplus \bigwedge^4(E)
+$$
+Como consecuencia $\mathrm{dim}(\mathcal{C}(E))=\mathrm{dim}(S^2(\bigwedge^2(E))-\mathrm{dim}(\bigwedge^4(E))$ y haciendo los cálculos se obtiene la fórmula
+$$
+\mathrm{dim}(\mathcal{C}(E)) = \frac{n^2(n^2-1)}{12}
+$$
+
+\noindent{\bf Observación.}
+
+\smallskip
+
+En dimensiones $2$ y $3$ el sumando $\bigwedge^4(E)$ es nulo y se tiene la identificación del espacio $S^2(\bigwedge^2(E))$ con $\mathcal{C}(E)$.  En dimensión $2$ y $3$ la identidad de Bianchi es  consecuencia necesaria de las dos primeras propiedades  que definen los tensores de curvatura. 
+
+
+
+
+\section{Contracciones}
+
+
+
+Dados dos vectores $y,z \in E$, a cada tensor de curvatura se le puede asociar una forma bilineal sobre $E$
+$$
+\begin{array}{ccc}
+E \times E & \lto& \R \\
+(x,a)& \lto & R(x,y,z,a)
+\end{array}
+$$
+En general esta aplicación bilineal la denotaremos por $R(\cdot,y , z, \cdot )$.  Esta forma bilineal tiene una traza que se calcula mediante la fórmula
+$$
+\sum_{i=1}^n R(e_i,y,z,e_i)
+$$
+siendo $\{e_i\}$ una base ortonormal arbitraria.  Asociando  a cada par de vectores $y,z$ la traza de la aplicación bilineal $R(\cdot,y, z, \cdot)$ construimos una aplicación bilineal de $E \times E$ en $\R$.  Denotamos dicha aplicación por $c(R)$ y decimos que es \index{tensor!de Ricci} {\sf tensor de Ricci} (también se suele denotar por $Ric$) asociado a $R$.  En fórmulas
+$$
+c(R)(y,z)= \traza(R(\cdot,y, z, \cdot))= \sum_i R(e_i, y, z,e_i)
+$$
+con $\{e_i\}$ ortonormal\footnote{En las referencias donde el tensor de curvatura tiene el signo contrario, el tensor de Ricci se construye contrayendo las variables $1$ y $3$. De este modo el tensor de Ricci es independiente del signo asignado al tensor de curvatura (ver \cite{galrie} pág. 111).}. Aplicando la propiedad $d)$  vemos que esta aplicación además de ser bilineal, es simétrica.  Denotando por $S^2(E)$ al conjunto de formas bilineales simétricas sobre $E$ tenemos la
+
+\begin{defi}
+
+Llamamos \index{contracción de Ricci}{\sf contracción de Ricci} a la aplicación lineal
+$$
+\begin{array}{lccc}
+c: & \mathcal{C}(E) & \lto & S^2(E) \\
+     & R & \lto & c(R)
+\end{array}
+$$
+
+\end{defi}   
+
+
+ Calculemos las coordenadas del tensor de Ricci. Sea
+$$
+R= R_{ijkl}\, e_i\otimes e_j\otimes e_k \otimes e_l 
+$$
+Para calcular las coordenadas del tensor de Ricci, debemos averiguar los números $c(R)_{ij}= c(R)(e_i,e_j)$.  Teniendo un poco de cuidado en el manejo de los índices se obtiene
+$$
+ c(R)_{ij}=\sum_\alpha R(e_\alpha,e_i,e_j,e_\alpha) =\sum_\alpha R_{\alpha i j\alpha}
+$$
+
+
+\bigskip
+
+\noindent{\bf Observación.}
+
+\smallskip
+
+En nuestra definición de tensor de Ricci hemos dejado fijas las variables $2$ y $3$ y hemos utilizado las variables $1$ y $4$ para calcular la traza.  Del mismo modo podríamos haber fijado otras variables.  Debido a las simetrías del tensor de curvatura, en todos los casos nos va a dar o bien $c(R)$ o bien el mismo tensor cambiado de signo, o bien el tensor nulo.  En esencia el tensor de Ricci es la única contracción no nula del tensor de curvatura.
+
+\bigskip
+
+
+
+Como el tensor de Ricci es una forma bilineal, tiene una traza, que denotaremos por $s(R)$ y diremos que es la \index{curvatura!escalar} {\sf curvatura escalar} del tensor $R$.  En fórmulas
+$$
+s(R)= \sum_j c(R)(e_j,e_j)= \sum_{i,j}R(e_i,e_j,e_j,e_i)
+$$
+
+Denotaremos por $c(R)_0$ al tensor de Ricci sin traza.  En vista de la definición anterior la fórmula para obtenerlo es
+$$
+c(R)_0= c(R)- \frac{s(R)}{n}
+$$
+
+
+
+
+\noindent{\bf Ejemplos.}
+
+\begin{itemize}
+
+\item Sea $\V$ una variedad riemanniana.  En cada punto $p \in \V$ podemos construir la contracción de Ricci, utilizando $R_p$ y $g_p$.  En coordenadas el tensor de Ricci se expresa mediante funciones diferencibles, lo que prueba que dicho tensor es diferenciable. Utilizando coordenadas vemos que tanto $s(R)$ como $c(R)_0$ son también diferenciables.
+
+
+\item Si pensamos en $c(R)$ como en un endomorfismo, este resulta ser simétrico respecto a la métrica.  Por ello siempre diagonaliza y sus valores propios son reales.
+
+\item Sea $\V$ una variedad de dimensión mayor o igual que $3$. Los tensores $g$ y $c(R)$ son del mismo tipo.  Si ambos son proporcionales (sobre el anillo de funciones) 
+$$
+c(R)=f. g\,\text{ con } f \in \C^\infty(\V
+$$
+ decimos que $\V$ es una \index{variedad!de Einstein}{\sf variedad de Einstein}. Utilizando la identidad diferencial de Bianchi se demuestra (\cite{leerie}, pág. 125) que $f$ es necesariamente una función constante.
+
+
+\end{itemize}
+
+\noindent{\bf Observación 1.}
+
+\smallskip
+
+Para realizar cálculos en  coordenadas con estos tensores se suele emplear otra notación.  En vez de $c(R)_{ij}$ escribimos simplemente $R_{ij}$.  No existe riesgo de confusión con el tensor de curvatura puesto que éste siempre tiene cuatro índices. Del mismo modo emplearemos $R$ para denotar la curvatura escalar cuando escribamos expresiones en coordenadas.
+
+\section{Curvatura seccional}
+
+
+
+
+Sea $\V$ una variedad riemanniana, $p \in \V$ un punto y $x,y$ dos vectores ortonormales tangentes en $p$.  El plano que generan los vectores $x$ e $y$ lo denotamos por $\pi$.  En el punto $p$ tenemos la aplicación exponencial
+$$
+\exp_p: T_p(\V) \lto \V
+$$
+que es un difeomorfismo local en $p$.  La imagen del plano $\pi$ mediante esta aplicación es una subvariedad bidimensional en un entorno del punto $p$.  La curvatura gaussiana de esta superficie en $p$ se llama  {\sf curvatura seccional} del plano $\pi$ y se denota $K(\pi)$.  Haciendo los cálculos (\cite{leerie} pág. 146)  resulta que esta curvatura  seccional es justamente
+$$
+K(\pi)= - R_p(x,y,x,y)
+$$
+donde la aparición del signo menos proviene de nuestra elección del signo del tensor de curvatura. 
+
+
+
+\begin{defi}
+
+
+Sea $\pi$ un plano (subespacio bidimensional) del espacio vectorial euclídeo $(E,g)$ y sea $\{x,y\}$ una base ortonormal de dicho plano. Dado un tensor de curvatura $R$,  llamamos \index{curvatura!seccional}{\sf curvatura seccional} del plano $\pi$ al número real 
+$$
+K(\pi)=- R(x,y,x,y)=R(x,y,y,x)
+$$
+
+
+\end{defi}
+
+
+\noindent{\bf Observación.}
+
+\smallskip
+
+El conjunto de todos los subespacios de dimensión $k$ de un espacio vectorial de dimensión $n$ puede ser dotado de una estructura de variedad.  Esta variedad se denomina {\sf grassmaniana}\index{grassmaniana} y se denota $G_k(n)$.  La curvatura escalar se puede entender como una  función definida sobre $G_2(n)$.
+
+\bigskip
+
+A pesar de introducir una base para construir la curvatura seccional, dicho número es independiente de la base tomada.
+
+\begin{propo}
+
+La curvatura seccional no depende de la base ortonormal tomada en su definición.
+
+\end{propo}
+
+
+
+
+\dem
+
+Si $x_1,y_1$ es otra base ortonormal (con la misma orientación), tenemos\linebreak $x= \cos(\theta)x_1+\sen(\theta)y_1$ e $y= -\sen(\theta)x_1+\cos(\theta)y_1$.  Realizando los cálculos se comprueba la independencia de la base. Demostración análoga con bases que cambian la orientación.\fin
+
+
+
+
+
+Existe también una fórmula que nos permite calcular la curvatura seccional utilizando una base arbitraria y no necesariamente ortonormal.
+
+\begin{propo}[\normalfont \cite{kobfou}, vol. 1, pág. 200]
+
+Sea $x,y$ una base de un plano $\pi$.  Se tiene
+$$
+K(\pi)=-\frac{R(x,y,x,y)}{g(x,x)g(y,y)-g(x,y)g(x,y)}=-\frac{R(x,y,x,y)}{R_1(x,y,x,y)}
+$$
+
+\end{propo}
+
+
+\dem
+
+A partir de la base $x,y$ dada construimos la base ortonormal
+$$
+e_1 =\frac{x}{g(x,x)^{1/2}}, \quad e_2= \frac{1}{a}\big(g(x,x)\cdot y- g(x,y)\cdot x\big)
+$$
+donde $a$ denota la constante de normalización.  Sustituyendo en la expresión 
+$$
+K(\pi)= -R(e_1,e_2,e_1,e_2)
+$$\enlargethispage{0.2 cm}
+se termina. \fin
+
+
+
+Debido a las simetrías de los tensores de curvatura, la curvatura seccional basta para caracterizar al tensor de curvatura.
+
+\begin{propo}[\normalfont \cite{leerie} pág. 146]
+
+Si dos tensores de curvatura verifican la identidad
+$$
+R(x,y,x,y)= R'(x,y,x,y) \text{ para todo } x , y \in E
+$$
+entonces $R=R'$.
+
+\end{propo}
+
+\dem
+
+
+
+Restando ambos tensores, basta demostrar que $R(x,y,x,y)=0$ para todo par de vectores, implica que $R$ es nulo.
+
+Sea entonces $R$ un tensor de curvatura que cumple $R(x,y,x,y)=0$ para todo par de vectores
+\begin{equation*}
+\begin{split}
+ R(x,y+a,x,y+a)=
+R(x,y,x,y)+R(x,y,x,a)\\+R(x,a,x,y)+R(x,a,x,a)=
+ 2 R(x,y,x,a)=0
+\end{split}
+\end{equation*}
+
+De este modo se cumple $R(x,y,x,a)=0$ para toda terna de vectores.  Aplicamos ahora esta identidad 
+\begin{equation*}
+\begin{split}
+R(x+z,y,x+z,a) = \\
+R(x,y,z,a)+ R(z,y,x,a)= \\
+R(x,y,z,a)- R(y,z,x,a)=0
+\end{split}
+\end{equation*}
+Para todos los vectores se cumple 
+$$
+R(x,y,z,a)=R(y,z,x,a)
+$$
+  Realizando los mismo cálculos, pero cambiando el nombre de las letras
+$$
+R(z,x,y,a)=R(x,y,z,a)
+$$
+Sumando estas ecuaciones con la ecuación trivial
+$$
+R(x,y,z,a)=R(x,y,z,a)
+$$
+deducimos que\enlargethispage{0.2 cm}
+$$
+3R(x,y,z,a)= R(x,y,z,a)+R(y,z,x,a)+R(z,x,y,a)
+$$
+que es cero por la identidad de Bianchi. \fin
+
+\noindent{\bf Observación.}
+
+\smallskip
+
+Existen fórmulas explícitas que nos permiten calcular el tensor de curvatura a partir de la curvatura seccional (ver \cite{checom} pág. 16).
+
+\bigskip
+
+\begin{cor}
+
+Si $R$ y $R'$ son dos tensores  tales que $K(\pi)=K'(\pi)$ para todo plano, entonces $R=R'$.
+
+\end{cor}
+
+
+\noindent{\bf Ejemplos.}
+
+\begin{itemize}
+
+
+\item La curvatura seccional asociada al tensor $R_1$ es igual a $-1$ en todos los puntos.  La curvatura seccional asociada a $k_0R_1$ es $-k_0$.
+
+\item Si la curvatura seccional asociada a un tensor $R$ es una constante $k_0$, tenemos que
+$$
+k_0=-\frac{R(x,y,x,y)}{R_1(x,y,x,y)}
+$$ 
+para todo par de vectores.  Se deduce que
+$$
+R(x,y,x,y)= -k_0R_1(x,y,x,y)
+$$
+y necesariamente $R= -k_0 R_1$.  Si la curvatura seccional es constante en todos los planos, necesariamente el tensor de curvatura es un múltiplo de~$R_1$.
+
+
+
+\item Una variedad riemanniana se dice que tiene \index{curvatura!constante} {\sf curvatura constante} si su curvatura seccional en todos los puntos y para todos los planos tangentes es constante.  El espacio euclídeo es un ejemplo de variedad de curvatura constante e igual a cero.  La esfera $n$-dimensional $S^n$ tiene curvatura constante $1$ y el espacio hiperbólico $H^n$ tiene curvatura $-1$
+
+\item Decimos que una variedad tiene {\sf curvatura positiva} \index{curvatura!positiva} si su curvatura seccional en todos los puntos y en todos los planos es estrictamente positiva.  Esto es equivalente a la positividad de la función definida en el fibrado de  grasmanianas.
+
+\item Recordemos la fórmula que nos proporciona la curvatura escalar
+$$
+s(R)= \sum_j c(R)(e_j,e_j)= \sum_{i,j}R(e_i,e_j,e_j,e_i)
+$$
+Es simplemente una suma de curvaturas seccionales de planos perpendiculares entre si.
+
+\end{itemize}
+
+%\end{document}
+\section{Producto de Kulkarni y tensor de Weyl}\label{sec:productokulkarni}
+
+Más información sobre el producto de Kulkarni puede hallarse en \cite{besein}, capítulo I-G, y \cite{galrie} capítulo III-K. También es interante consultar la introducción de la tesis doctoral \cite{chrkil}.
+
+\bigskip
+
+Denotamos por $S^2(E)$ al conjunto de todos las formas bilineales simétricas sobre $E$.  Asociado a cada par $(h,k)$ de formas simétricas, existe un tensor de grado cuatro, que pasamos a construir.
+
+\begin{defi}
+
+Dado $h,k \in S^2(E)$ llamamos producto\footnote{La notación para el producto de Kulkarni no está estandarizada. Por ejemplo en \cite{chrkil} se emplea el símbolo $\odot$ y en \cite{lafcon} y \cite{galrie} emplean simplemente un punto. Nosotros hemos tomado la notación de \cite{besein}.} de \index{producto de Kulkarni}{\sf Kulkarni} (o de Kul\-karni-Nomizu)  a la aplicación 
+$$
+h \kulkarni k : E \times E \times E \times E \lto \R
+$$
+dada por la expresión
+\begin{equation*}
+\begin{split}
+h \kulkarni k\,(x,y,z,a)= h(x,z)k(y,a)+h(y,a)k(x,z)\\
+-h(x,a)k(y,z)-h(y,z)k(x,a)
+\end{split}
+\end{equation*}
+
+\end{defi}
+
+
+\noindent{\bf Propiedades.}
+
+
+
+\begin{itemize}
+
+
+\item La aplicación $h \kulkarni k$ es lineal en cada variable y es un tensor de cuarto orden.
+Además, el producto  de Kulkarni de dos formas simétricas es un tensor de curvatura
+$$
+h \kulkarni k \in \mathcal{C}(E)
+$$
+Las condiciones de antisimetría son casi evidentes y escribiendo la identidad de Bianchi para este tensor, todos los sumandos se anulan por pares (tener en cuenta que $h$ y $k$ son simétricas).
+
+\item El producto es conmutativo y distributivo en cada componente.
+\begin{eqnarray*}
+h \kulkarni k&=& k \kulkarni h\\
+(h+h') \kulkarni k &= & h \kulkarni k + h' \kulkarni k
+\end{eqnarray*}
+
+\item Si $g$ es el producto euclídeo, $g\kulkarni g= 2R_1$. Entendiendo las formas bilineales simétricas como operadores autoadjuntos, $g \kulkarni g= 2 \Id$.
+
+\item  A veces es útil calcular el producto de Kulkarni en coordenadas.  Siguiendo los convenios habituales
+$$
+(h \kulkarni k)_{ijkl}= h_{ik}k_{jl}+h_{jl}k_{ik}-h_{il}k_{jk}-h_{jl}k_{il}
+$$
+
+Esto demuestra que el producto de Kulkarni de dos tensores diferenciables es diferenciable. Esta fórmula es similar a la expresión del tensor de curvatura en coordenadas normales.
+
+
+\end{itemize}
+
+El producto de Kulkarni está muy relacionado con  la contracción de Ricci como muestran los siguientes resultados
+
+\begin{propo}[\normalfont \cite{lafcon} pág. 68]\label{propo:contraccion}
+
+Sea $g$ la métrica euclídea. Si $n>2$  se tiene
+$$
+c(h \kulkarni g)= (2-n)h- \traza(h)\cdot g
+$$
+
+\end{propo}
+
+
+\newpage
+
+\dem
+
+Sea $\{e_i\}$  una base ortonormal.  Recordemos que  $x= x_ie_i$ donde $x_i=g(x,e_i)$.
+\begin{equation*}
+\begin{split}
+c(h \kulkarni g)(x,y)= h\kulkarni g(e_i,x,y,e_i)= \\h(e_i,y)g(x,e_i)+h(x,e_i)g(e_i,y)
+-h(e_i,e_i)g(x,y)-h(x,y)g(e_i,e_i)=\\
+h(e_i,y)x_i+ h(x,e_i)y_i -\traza(h)g(x,y)- h(x,y)n = \\
+h(x,y)+h(x,y)- \traza(h)g(x,y)- nh(x,y)=\\
+(2-n)h(x,y)- \traza(h)g(x,y)
+\end{split}
+\end{equation*}\enlargethispage{0.01 cm}
+y como esto es cierto para todo $x,y$, se concluye. \fin
+
+
+En particular $c(g \kulkarni g)=2(1-n)g \neq 0$, lo que implica que $g \kulkarni g$ no es nulo.
+
+
+\begin{cor}[\normalfont \cite{lafcon} pág. 68]
+
+Si $n >2$ la aplicación lineal
+$$
+\begin{array}{cccc}
+\phi_g:& S^2(E) & \lto & \mathcal{C}(E) \\
+    & h & \lto & h \kulkarni g
+\end{array}
+$$
+es inyectiva.
+
+\end{cor}
+
+\dem
+
+Si $\phi_g(h)=0$ entonces $h \kulkarni g=0$.  Aplicando la contracción de Ricci
+$$
+c(h \kulkarni g)= (2-n)h- \mathrm{tr}(h)g=0
+$$
+Entonces $h$ es nulo o proporcional a $g$.  Pero no puede ser proporcional a $g$ puesto que $g \kulkarni g\neq 0$. \fin
+
+\begin{cor}
+
+En dimensión $3$ la aplicación anterior es un isomorfismo.
+
+\end{cor}
+
+\dem
+
+Las dimensiones de los espacios coinciden y  es inyectiva. \fin
+
+Utilizando esta aplicación podemos considerar que $S^2(E)$ es un subespacio de $\mathcal{C}(E)$ y como el espacio de los tensores de curvatura es euclídeo, tiene sentido calcular el ortogonal.
+
+\begin{defi}
+
+El ortogonal a $\phi_g(S^2(E))$ en el espacio euclídeo $\mathcal{C}(E)$ se denota por $\W(E)$ y se dice que es el subespacio de los {\sf tensores de Weyl} del espacio vectorial $E$.
+
+\end{defi}
+
+
+\noindent{\bf Observación.}
+
+\smallskip
+
+En dimensión $3$ no tiene sentido hablar de tensores de Weyl.
+
+\bigskip
+
+Dado un tensor de curvatura $R$, como $\mathcal{C}(E) = \phi_g(S^2(E)) \perp \mathcal{W}(E)$, dicho tensor se expresa, de modo único, como $R= h(R)\kulkarni g+ W(R)$.   La forma bilineal simétrica $h(R)$ se llama \index{tensor!de Schouten} {\sf tensor de Schouten} y $W(R)$ se llama \index{tensor!de Weyl}{\sf tensor de Weyl}.
+
+\bigskip
+
+Hemos construido el subespacio $\mathcal{W}(E)$ utilizando el producto de Kulkarni y la estructura euclídea del espacio de tensores.  Se puede construir también dicho subespacio utilizando la contracción de Ricci.
+
+
+
+
+
+
+\begin{propo}[\normalfont \cite{dinwey} pág. 1]
+
+Sea $R$ un tensor de curvatura arbitrario
+$$
+\escalar{R}{ \phi_g(h)}= -4 \escalar{c(R)}{h}
+$$
+
+\end{propo}
+
+\dem
+
+Demostraremos el resultado utilizando una base ortonormal
+\begin{equation*}
+\begin{split}
+\escalar{R}{ \phi_g(h)}=\escalar{R}{h\kulkarni g}=\\
+R_{ijkl}\big( h_{ik}\delta_{jl}+h_{jl}\delta_{ik}-h_{il}\delta_{jk}-h_{jk}\delta_{il} \big)=\\
+R_{ijkj}h_{ik}+R_{ijil}h_{jl}- R_{ijjl}h_{il}-R_{ijki}h_{jk}
+\end{split}
+\end{equation*}
+
+
+Aplicando las propiedades de simetría de los tensores de curvatura, se observa los últimos cuatro sumandos son iguales y se diferencian solamente en los nombres dados a las componentes.  Se tiene entonces
+$$
+\escalar{R}{h\kulkarni g}= -4 R_{\alpha ij \alpha}h_{ij}= -4 R_{ij}h_{ij}= -4\escalar{c(R)}{h}
+$$\enlargethispage{0.5 cm}
+que es lo que pretendíamos demostrar. \fin
+
+\noindent{\bf Observación.}
+
+\smallskip
+
+Formalmente, podemos entender que la aplicación $-4c$ es la adjunta de $\phi_g$.  Debemos tener cuidado con esta interpretación, puesto que un producto escalar se realiza en el espacio de los tensores de orden $4$ y otro en el de los tensores de orden $2$.
+
+\bigskip
+
+\begin{cor}
+
+El subespacio de los tensores de Weyl coincide con el núcleo de la contracción de Ricci
+$$
+\mathcal{W}(E)= \mathrm{Ker}(c)
+$$
+
+\end{cor}
+
+\dem
+
+Si $R \in \mathcal{W}(E)$ entonces es ortogonal a $\phi_g(S^2(E))$. Se tiene que 
+$$
+0=\escalar{R}{ h \kulkarni g}= -4 \escalar{c(R)}{h}
+$$
+para toda forma bilineal $h$.  Como la métrica es  no degenerada concluimos  que $c(R)=0$.
+
+\smallskip
+
+Si $R \in \mathrm{Ker}(c)$, utilizando el mismo argumento, tenemos que $R$ es ortogonal a $\phi_g(S^2(E))$ y es un tensor de Weyl.  \fin
+
+
+Hemos demostrado que el espacio de los tensores de curvatura descompone en suma ortogonal de tres subespacios
+$$
+\mathcal{C}(E)= \R\cdot g\kulkarni g \perp S_0^2(E)\kulkarni g \perp \mathcal{W}(E)
+$$
+La fórmula explícita de la descomposición se da en el
+
+\begin{teo}[\normalfont \cite{besein} pág. 48]
+
+Todo tensor de curvatura $R$ se puede expresar de modo único como
+$$
+R= \frac{s(R)}{2n(1-n)}\, g \kulkarni g + \frac{1}{2-n}\left(c(R)- \frac{s(R)}{n} \, g\right) \kulkarni g + W
+$$
+
+\end{teo}
+
+\dem
+
+Debido a la descomposición en suma ortogonal podemos expresar $R$ como
+$$
+R= \alpha g \kulkarni g + k \kulkarni g + W
+$$
+Debemos hallar $\alpha$ y $k$.  Calculando la contracción de Ricci en ambos miembros y tenido en cuenta que $c(W)=0$ y que $\traza(k)=0$
+\begin{equation*}
+\begin{split}
+c(R)= \alpha c(g \kulkarni g) + c(k \kulkarni g) =\\ \alpha((2-n)g-ng))+(2-n)k=\\
+\alpha(2-2n)g+(2-n)k
+\end{split}
+\end{equation*}
+Calculando la traza en ambos miembros
+$$
+s(R)= \alpha(2-2n)n= \alpha\, 2n(1-n)
+$$
+de donde se despeja $\alpha$. Sustituyendo $\alpha$ en la expresión anterior y despejando $k$ se obtiene el resultado. \fin
+
+
+
+\noindent{\bf Ejemplos.}
+
+\begin{itemize}
+
+\item De las tres partes en las que se divide el tensor de curvatura, la primera está asociada a la curvatura escalar, la segunda al tensor de Ricci (sin traza) y la tercera al tensor de Weyl.  
+
+\item De este resultado también se puede sacar una fórmula para el tensor de Schouten \label{riccischouten}
+$$
+h(R)= \frac{1}{2-n}\bigg(c(R)+ \frac{s(R)}{2(1-n)} \, g \bigg)
+$$
+lo que demuestra que el tensor de Schouten es diferenciable.  También se deduce que el tensor de Weyl es diferenciable.
+
+\item Podemos escribir en coordenadas el tensor de Weyl, teniendo en cuenta que $W= R- h(R)\kulkarni g$.
+\begin{equation*}
+\begin{split}
+W_{ijkl}= R_{ijkl}- \frac{R}{(n-1)(n-2)}\big(g_{ik}g_{jl}-g_{il}g_{jk}\big)+\\
+\frac{1}{n-2}\big(R_{ik}g_{jl}+R_{jl}g_{ik}-R_{il}g_{jk}-R_{jk}g_{il}\big)
+\end{split}
+\end{equation*}
+que es la expresión clásica del tensor de Weyl (\cite{eisrie} pág. 90).
+
+
+\end{itemize}
+
+
+
+
+
+
+
+\section{Representaciones del grupo ortogonal}
+
+Las referencias de esta sección son el capítulo I-G de \cite{besein} y  III-K de \cite{galrie}. Para las cuestiones de álgebra lineal basta con cualquier tratado elemental de dicha materia.
+
+\bigskip
+
+Sea $E$ un espacio vectorial euclídeo.  El \index{grupo ortogonal} {\sf grupo ortogonal} $O(E)$ está constituido por todos los endomorfismos de $E$ que conservan la métrica
+$$
+O(E)= \{ \varphi \in \textrm{End}(E) \text{ tales que } \escalar{\varphi(x)}{\varphi(y)}= \escalar{x}{y} \text{ para todo } x, y \in E\}
+$$
+
+Existe una teoría general que estudia las representaciones generales de este grupo.  Sin embargo nosotros no utilizaremos dicha teoría\footnote{Una referencia muy completa sobre la teoría general de representaciones es \cite{fulrep}.}.
+
+
+\bigskip
+
+\noindent{\bf Ejemplos.}
+
+\begin{itemize}
+
+
+\item La inclusión natural $O(E) \rightarrow \mathrm{Gl}(E)$ da una representación del grupo ortogonal en el espacio  $E$. El conjunto $E$ está dotado de una estructura de módulo sobre el grupo ortogonal.  Siempre que nos refiramos a $E$ lo consideramos dotado de esta estructura.
+
+\item   Consideramos el morfismo de grupos 
+$$
+\begin{array}{ccc}
+O(E) & \lto & \mathrm{Gl}(E^*) \\
+\gamma & \lto & (\gamma^t)^{-1}
+\end{array}
+$$
+Esta representación del grupo ortogonal sobre $E^*$ se llama \index{representación dual} {\sf  representación dual} de $E$.
+
+
+
+\item Los productos tensoriales de las representaciones $E$ y $E^*$ son también representaciones.  Para definir la acción de un morfismo sobre el espacio de tensores, basta definir como actua sobre un conjunto generador y extender después el morfismo por linealidad.
+Si $\{x_i\}$ son elementos de $E$ y $\{\omega_j\}$ son elementos del dual, para toda tranformación ortogonal $\gamma$ se tiene
+$$
+\gamma(x_1 \otimes \cdots  x_k \otimes \omega_1 \otimes \cdots \omega_l)= \gamma(x_1) \otimes \cdots\gamma(x_k) \otimes (\gamma^t)^{-1} (\omega_1) \otimes \cdots(\gamma^t)^{-1} (\omega_l)
+$$
+
+\item Si $\bigwedge^2(E)$ es el espacio de los $2$-vectores, se tiene una representación natural dada por la relación
+$$
+\gamma(x \wedge y) = \gamma(x) \wedge \gamma(y)
+$$
+que se extiende por linealidad a los $2$-vectores que no son descomponibles.  Este es un caso particular del ejemplo anterior, donde primero hacemos actuar el grupo sobre el producto tensorial $E \otimes E$ y después consideramos el submódulo de las formas antisimétricas.
+
+\item El grupo ortogonal actua en el producto tensorial $T_4(E)$.  El conjunto de tensores de curvatura es un submódulo de esta representación.
+
+\item El grupo ortogonal actua sobre el espacio de $2$-vectores. El conjunto\linebreak $S^2(\bigwedge^2(E))$ se identifica con el espacio vectorial de los endomorfismos autoadjuntos de $\bigwedge^2(E)$. Pensado de esta manera, el grupo ortogonal actua sobre un elemento $R \in S^2(\bigwedge^2(E))$ mediante la regla
+$$
+g(R)= g^{-1}R g
+$$
+
+
+
+\end{itemize}
+
+  En realidad, en el caso del grupo ortogonal basta estudiar simplemente la representación $E$ y sus productos tensoriales. Podemos olvidarnos de la representación dual.
+  
+  \newpage
+
+
+
+\begin{propo}
+
+Las representaciones $E$ y $E^*$ son equivalentes.
+
+\end{propo}
+
+\dem
+
+La polaridad $p: E \rightarrow E^*$ es un morfismo entre ambas representaciones y por ser biyectiva, es un isomorfismo. \fin
+
+
+Muchas veces tendremos que realizar cálculos con estas representaciones.  Para estos casos es útil la notación matricial. Para ello tomamos bases en los espacios vectoriales y como tratamos con espacios euclídeos, lo más cómodo es trabajar con bases ortonormales.
+
+Bajo estas hipótesis el grupo ortogonal en forma matricial es
+$$
+O_n= \{A \in M_n\text{ tales que } A A^t= \Id\}
+$$
+Las formas bilineales se corresponden con las matrices cuadradas.  A las formas  simétricas le corresponden matrices simétricas y análogamente con las antisimétricas.  A nivel matricial, la acción del grupo es
+$$
+\begin{array}{ccc}
+O_n \times M_n & \lto & M_n \\
+(A , M) & \lto & A^t M A
+\end{array}
+$$
+Fijada una base, los endomorfismos del espacio vectorial se representan también por matrices.  En este caso la acción del grupo viene dada por 
+$$
+\begin{array}{ccc}
+O_n \times M_n & \lto & M_n \\
+(A , M) & \lto & A^{-1} M A
+\end{array}
+$$
+pero como para el grupo ortogonal $A^t= A^{-1}$ ambas representaciones son equivalentes.
+
+\bigskip
+
+\noindent{\bf Ejemplos.}
+
+\begin{itemize}
+
+\item El subespacio de la matrices simétricas es invariante por la acción del grupo. Si $M$ es simétrica, debemos comprobar que $A^tMA$ también lo es y esto es casi evidente
+$$
+\big(A^tM A\big)^t=A^t M^t (A^t)^t = A^tMA
+$$
+El mismo argumento es válido para matrices antisimétricas. 
+
+\item Si en ejemplo anterior cambiamos el grupo $O_n$ por el grupo general lineal, se tienen resultados análogos.
+
+\item  El conjunto de las matrices simétricas de traza nula es invariante por el grupo ortogonal.  En este caso este subespacio no es invariante por el grupo lineal.
+$$
+\traza(A^tMA) = \traza(A^{-1} M A)= \traza(M)
+$$
+
+\item El espacio vectorial generado por la identidad es un subespacio invariante para el grupo ortogonal.
+
+\end{itemize}
+
+
+
+ En general, las representaciones obtenidas mediante productos tensoriales de representaciones irreducibles, son reducibles.  El caso más sencillo se presenta en la representación $E \otimes E$.  Como sabemos, esta representación es reducible considerada como representación del grupo lineal, puesto que toda forma bilineal se puede expresar de modo único como suma de una forma simétrica y otra antisimétrica.  En el caso del grupo ortogonal, esta representación se fragmenta en tres partes.  Denotaremos por $\bigwedge^2 E$ al conjunto de formas bilineales antisimétricas, por $S_0^2(E)$ el conjunto de formas bilineales simétricas de traza nula y por $\R  g$ al conjunto de múltiplos de la forma euclídea.
+ 
+\begin{propo}[\normalfont \cite{besein}, pág. 45]
+
+La representación $E \otimes E$ del grupo ortogonal es isomorfa a
+$$
+\textstyle E \otimes E = \bigwedge^2(E) \oplus S_0^2(E) \oplus \R  g
+$$
+
+\end{propo}
+
+\dem
+
+Si $h$ es una forma bilineal, ésta se puede expresar de modo único como suma de una forma simétrica $s$  y otra antisimétrica $a$, donde
+\begin{eqnarray*} 
+s(x,y) & = & \frac{h(x,y)+h(y,x)}{2}\\
+a(x,y) & = & \frac{h(x,y)-h(y,x)}{2}
+\end{eqnarray*}
+La parte simétrica $s$ se puede descomponer como 
+$$
+s= s_0+ \frac{\traza(h)}{n}g
+$$
+ donde $s_0$ denota la forma bilineal libre de traza. La invariancia de los subespacios se ha probado en los ejemplos anteriores. \fin
+ 
+ En los temas anteriores se ha trabajado con distintos espacios vectoriales construidos a partir de un espacio euclídeo. La acción del grupo ortogonal sobre cada uno de estos espacios está representada siempre por operadores que conservan estos productos escalares.  Además hemos definido ciertas aplicaciones lineales entre estos espacios, que en general son morfismos de representaciones.  Vistas desde esta nueva perspectiva, las descomposiciones en suma directa reflejan el hecho de que los espacios que hemos estudiado no son irreducibles bajo la acción del grupo ortogonal.
+ 
+
+ 
+ 
+ \begin{propo}
+ 
+ El morfismo de Bianchi
+ $$
+ b : T_4(E) \rightarrow T_4(E)
+ $$
+ la contracción de Ricci
+ $$
+ c : \mathcal{C}(E) \rightarrow S^2(E)
+ $$
+  la curvatura escalar 
+  $$
+  s: \mathcal{C}(E) \rightarrow \R
+  $$
+   y el producto de Kulkarni con la métrica 
+  $$
+  \phi_g: S^2(E)\rightarrow \mathcal{C}(E)
+  $$
+   son morfismos de representaciones.
+ 
+ \end{propo}
+ 
+ 
+ Los núcleos de estos morfismos son entonces subespacios invariantes o submó\-dulos, si utilizamos un lenguaje más algebraico.  Podemos extraer varios resultados, alguno de los cuales enunciamos en los siguientes 
+ 
+ \bigskip
+ 
+ \noindent{\bf Ejemplos.}
+ 
+ \begin{itemize}
+ 
+ \item El núcleo del morfismo de Bianchi es $\mathcal{C}(E)$, que es un submódulo.
+ 
+ \item El conjunto de los tensores de Weyl coincide con la intersección de $\mathrm{Ker}(c)$ y $\mathrm{Ker}(b)$. Dicha representación es  irreducible (\cite{besgeo} pág. 185).
+ 
+ 
+ \item Si $n >2$ la aplicación inyectiva $\phi_g$ tiene como imagen un submódulo.  Este submódulo es reducible puesto que $S^2(E)$ es reducible.
+ 
+ \end{itemize}
+ 
+\noindent{\bf Observación.}
+
+\smallskip
+
+ Por restricción, toda representación de $O(E)$ induce una representación del grupo especial ortogonal $SO(E)$. Los tensores de Weyl forman una representación irreducible $SO(E)$, salvo en el caso en que $\mathrm{dim}(E)=4$.  En este caso,  dicha representación se descompone en suma de dos representaciones  irreducibles denotadas $\mathcal{W}^+(E)$ y $\mathcal{W}^-(E)$ (\cite{besein} pág. 50).  Las componentes del tensor de Weyl en dichas representaciones se dicen que son la parte dual y antidual del tensor de Weyl.
+
+ 
+\section{Cambios conformes en la métrica}
+
+
+
+En un espacio euclídeo tenemos el concepto de producto escalar y de módulo de un vector.  Con ayuda de ambos se puede definir el \index{ángulo}{\sf ángulo} $\alpha$ que forman dos vectores $x$ e $y$ como la solución de la ecuación
+$$
+g(x,y)= g(x,x)^{1/2}g(y,y)^{1/2} \cos(\alpha)
+$$
+Pueden existir otras métricas definidas sobre el mismo espacio vectorial que den el mismo valor para dicho ángulo.
+
+\begin{propo}
+
+Sea $E$ un espacio vectorial, $g $ y $\widetilde g$ dos métricas euclídeas.  Si el ángulo que forman todo par de vectores es el mismo en ambas métricas, necesariamente existe una constante positiva $k$ que cumple $\widetilde g= k g$.
+
+\end{propo}
+
+\dem
+
+Sea $\{e_i\}$ una base ortonormal para $g$.  Como se conservan los ángulos, esta base es ortogonal para $\widetilde g$.  Denotamos $a_i = \widetilde g(e_i,e_i)$, que es una constante positiva.  Veamos que el valor de $a_i$ es el mismo para todos los elementos de la base.  Tomamos los vectores $e_1$ y $e_1+e_i$.  Calculamos el coseno del ángulo utilizando ambas métricas y lo igualamos
+\begin{equation*}
+\begin{split}
+\frac{g(e_1,e_1+e_i)}{\sqrt{g(e_1,e_1)}\sqrt{g(e_1+e_i,e_1+e_i)}}= \frac{1}{\sqrt{2}}=\\ \frac{\widetilde g(e_1,e_1+e_i)}{\sqrt{\widetilde g(e_1,e_1)}\sqrt{\widetilde g(e_1+e_i,e_1+e_i)}}= \frac{a_i}{\sqrt{a_1}\sqrt{a_1+a_i}}
+\end{split}
+\end{equation*}
+Resolvemos la ecuación y deducimos que $a_1=a_i$. Entonces  $\widetilde g = \sqrt{a_1}\,g$. \fin
+
+
+Si hacemos el mismo cálculo en una variedad riemanniana, para que en todos los espacios tangentes la noción de ángulo asociada a $g$ y la noción de ángulo asociada a $\widetilde g$ coincidan, debe existir una función positiva $f$ que verifique 
+$$
+\widetilde g = f g
+$$
+
+ Con objeto de simplificar cálculos  escribiremos la función como $e^{2f}$ donde ahora $f$ es una función arbitraria.  
+
+\begin{defi}
+
+Sean $g$ y $\widetilde g$ dos métricas de Riemann  en una variedad $\V$.  Decimos que son \index{métrica!conformemente equivalente} {\sf conformemente equivalentes} si existe una función $f\in C^\infty(\V)$   tal que $\widetilde g= e^{2f}g$. Denotamos por $[g]$ a la clase de equivalencia.
+
+\end{defi}
+   
+
+Asociados a una metrica de Riemann, existen diversos objetos en la variedad, como pueden ser el tensor de curvatura o la conexión de Levi-Civita.  Si cambiamos la métrica, todos estos objetos cambian, en general de un modo muy complicado.  Sin embargo, si pasamos de una métrica $g$ a un métrica conformemente equivalente, existen fórmulas simples y precisas que relacionan los objetos asociados.  
+
+\bigskip
+
+Trabajaremos con dos métricas $g$ y $\widetilde g$ en la variedad.  Los objetos creados a partir de $g$ se denotarán con la nomenclatura habitual y los creados a partir de $\widetilde g$ llevarán una tilde. También utilizaremos  $\escalar{-}{-}$ para denotar el producto escalar con la métrica $g$.
+
+
+
+
+
+\begin{propo}[\normalfont \cite{dinwey} pág. 4)]\label{propo:cambioconforme}
+Se cumple la fórmula
+$$
+\widetilde\nabla_XY= \nabla_XY+X(f)\cdot Y+ Y(f)\cdot X- \escalar{X}{Y} \mathrm{grad}(f)
+$$
+
+\end{propo}
+
+\dem
+
+ De acuerdo con la \index{fórmula de Koszul} {\sf fórmula de Koszul} (\cite{leerie}, pág. 69) que nos da la conexión de Levi-Civita asociada a $g$ se cumple
+ \begin{equation*}
+\begin{split}
+\escalar{ \nabla_X Y}{Z}= \frac{1}{2}\bigg(X\big(\escalar{Y}{Z}\big) + Y \big(\escalar{Z}{X}\big)- Z\big(\escalar{X}{Y}\big) \\ 
+- \escalar{Y}{[X,Z]}- \escalar{Z}{[Y,X]} + \escalar{X}{[Z,Y]}\bigg)
+\end{split}
+\end{equation*}
+Tenemos una fórmula análoga para la métrica $\widetilde g$.
+ \begin{equation*}
+\begin{split}
+\widetilde g(\widetilde\nabla_X Y,Z)= \frac{1}{2}\bigg(X \big(\widetilde g(Y,Z)\big) + Y \big(\widetilde g (Z,X)\big)- Z\big(\widetilde g(X,Y)\big) \\
+- \widetilde g(Y,[X,Z])- \widetilde g(Z,[Y,X]) + \widetilde g(X,[Z,Y])\bigg)
+\end{split}
+\end{equation*}
+Si introducimos de nuevo el producto $g$ en la última expresión 
+ \begin{equation*}
+\begin{split}
+e^{2f}\langle \widetilde\nabla_X Y,Z\rangle= \frac{1}{2}\bigg(X \big(e^{2f}\escalar{Y}{Z}\big) + Y \big(e^{2f}\escalar{Z}{X}\big)- Z\big(e^{2f}\escalar{X}{Y}\big) \\ 
+- e^{2f}\escalar{Y}{[X,Z]}- e^{2f}\escalar{Z}{[Y,X]} + e^{2f}\escalar{X}{[Z,Y]}\bigg)
+\end{split}
+\end{equation*}
+
+Los tres primeros sumandos se derivan utilizando la regla de Leibniz 
+\begin{equation*}
+\begin{split}
+\frac{1}{2}\bigg(
+2e^{2f}X(f)\escalar{Y}{Z}+e^{2f}X\big(\escalar{Y}{Z}\big)+
+2e^{2f}Y(f)\escalar{Z}{X}+\\
+e^{2f}Y\big(\escalar{Z}{X}\big)-
+2e^{2f}Z(f)\escalar{X}{Y}-e^{2f}Z\big(\escalar{X}{Y}\big)\\
+- e^{2f}\escalar{Y}{[X,Z]}- e^{2f}\escalar{Z}{[Y,X]} + e^{2f}\escalar{X}{[Z,Y]}\bigg)
+\end{split}
+\end{equation*}
+El factor $e^{2f}$ se elimina.  Los sumandos $2,4,6,7,8,9$ son justamente la conexión de Levi-Civita asociada a $g$. El término problemático  es
+$$
+-Z(f)\escalar{X}{Y}
+$$
+que se puede escribir como
+$$
+-\escalar{X}{Y}\escalar{\mathrm{grad}(f)}{Z}
+$$
+
+Resumiendo, podemos escribir la fórmula
+$$
+\langle\widetilde\nabla_X Y,Z\rangle=\escalar{\nabla_XY}{Z}+X(f) \escalar{Y}{Z}+Y(f) \escalar{X}{Z}-\escalar{X}{Y}\escalar{\mathrm{grad}(f)}{Z}
+$$
+Como la métrica es no degenerada se concluye. \fin
+
+
+
+De la relación obtenida se puede deducir la ley de transformación de los símbolos de Cristoffel
+
+\begin{cor}
+
+Se cumple
+$$
+\widetilde{\Gamma}_{ij}^k= \Gamma_{ij}^k + \delta_{ik}f_j+\delta_{jk} f_i-g^{km}g_{ij}f_m
+$$
+donde $f_i$ denota la derivada parcial de $f$ respecto a la coordenada $x_i$.
+
+\end{cor}
+
+\dem
+
+Aplicamos la proposición anterior  a los campos $\partial_i, \partial_j, \partial_k$.
+$$
+\widetilde\nabla_{\partial_i}\partial_j = \nabla_{\partial_i}\partial_j+ \partial_i(f) \partial_j+ \partial_j(f) \partial_i - \escalar{\partial_i}{\partial_j} \mathrm{grad}(f)
+$$
+y la escribimos en coordenadas
+\begin{equation*}
+\begin{split}
+\widetilde{\Gamma}_{ij}^k\partial_k=\Gamma_{ij}^k\partial_k+ f_i \partial_j + f_j\partial_i - g_{ij}\mathrm{grad}(f)=\\
+ \Gamma_{ij}^k\partial_k +f_i\delta_{jk} \partial_k + f_j\delta_{ik}\partial_k + g_{ij} g^{km}f_m \partial_k
+\end{split}
+\end{equation*}
+de donde se obtiene el enunciado. \fin
+
+\noindent{\bf Observación.}
+
+\smallskip
+
+Este mismo resultado se puede obtener utilizando la fórmula que proporciona los símbolos de Cristoffel a partir de los componentes de la métrica.
+$$
+\Gamma_{ij}^k = \frac{1}{2}g^{kl}( g_{il,j}+ g_{jl,i}-g_{ij,l} )
+$$
+
+
+
+
+
+\section{Cambios conformes en la curvatura}
+
+Como ya sabemos como se transforman las conexiones (o lo que es lo mismo, los símbolos de Cristoffel) al realizar un cambio conforme en la métrica, se pueden deducir las reglas de cambio de todos los objetos.  A nosotros nos interesan especialmente las transformaciones que se producen en el tensor de curvatura, en el tensor de Weyl y en el tensor de Schouten. El principal resultado es el
+
+\begin{teo}[\normalfont \cite{lafcon} pág. 71]\label{teo:cambiocurvatura}
+
+Con las notaciones anteriores se cumple
+$$
+\widetilde R= e^{2f}\big(R+ \nabla^2 f \kulkarni g - (df \otimes df) \kulkarni g + \frac{1}{2} \abs{d f}^2 g \kulkarni g\big)
+$$
+
+\end{teo}
+
+\dem
+
+Utilizaremos el resultado de la proposición \ref{propo:cambioconforme} y el hecho de que las conexiones son derivaciones en la segunda componente\footnote{Una demostración en coordenadas de esta proposición, con todo lujo de detalles, se encuentra en \cite{dinwey} pág. 4}.  Con objeto de ahorrar algunos cálculos, supondremos que los campos que utilizamos conmutan entre~si.  Esta hipótesis no resta validez al razonamiento puesto que si dos tensores son iguales sobre toda terna de campos que conmutan, entonces son iguales. 
+
+Calcularemos primeramente el tensor de curvatura de tipo $(3,1)$. 
+Desarrollamos el término $\widetilde \nabla_X\widetilde \nabla_Y Z$.
+\begin{equation*}
+\begin{split}
+\nabla_X\nabla_Y Z  + X(f) \cdot \nabla_Y Z  + \nabla_Y Z(f)\cdot X - \escalar{X}{\nabla_YZ} \nabla f    \\
++XY(f) \cdot Z  + Y(f) \nabla_X Z+ Y(f) Z(f) X + Y(f)X(f)  Z - Y(f) \escalar{X}{Z} \nabla f \\
++XZ(f)\cdot Y+ Z(f) \nabla_X Y+Z(f)Y(f)X  + Z(f)X(f) Y  - Z(f) \escalar{X}{Y}\nabla f\\
+-\escalar{\nabla_X Y}{Z} \nabla f  - \escalar{Y}{\nabla_XZ} \nabla f - \escalar{Y}{Z} \nabla_X \nabla f     \\
+-X(f) \escalar{Y}{Z}\nabla f- \escalar{Y}{Z} \abs{\nabla f}^2 X + \escalar{Y}{Z} X(f) \nabla f  
+\end{split}
+\end{equation*}
+Con objeto de nombrar los numerosos miembros de esta expresión nos referiremos a ella considerándola una matriz de nombre $a$.
+
+En el término $a_{52}$ hemos aplicado que $\nabla f(f)= \abs{\nabla f}^2$ y en siguiente término también  hemos sustituido $\escalar{\nabla f}{X}$ por $X(f)$.
+
+Desarrollamos ahora el término $-\widetilde \nabla_Y \widetilde \nabla_X Z$.  Debemos intercambiar $X$  e $Y$ en la expresión anterior y cambiar a todo de signo.  Obtenemos
+\begin{equation*}
+\begin{split}
+-\nabla_Y\nabla_X Z  - Y(f) \cdot \nabla_X Z  - \nabla_X Z(f)\cdot Y + \escalar{Y}{\nabla_XZ} \nabla f    \\
+-YX(f) \cdot Z  - X(f) \nabla_Y Z- X(f) Z(f) Y - X(f)Y(f)  Z + X(f) \escalar{Y}{Z} \nabla f \\
+-YZ(f)\cdot X - Z(f) \nabla_Y X - Z(f)X(f)Y  - Z(f)Y(f) X  + Z(f) \escalar{Y}{X}\nabla f\\
++\escalar{\nabla_Y X}{Z} \nabla f  + \escalar{X}{\nabla_YZ} \nabla f + \escalar{X}{Z} \nabla_Y \nabla f     \\
++Y(f) \escalar{X}{Z}\nabla f+ \escalar{X}{Z} \abs{\nabla f}^2 Y - \escalar{X}{Z} Y(f) \nabla f  
+\end{split}
+\end{equation*}
+Esta será nuestra matriz $b$. Se anulan los siguientes pares: $(a_{51},a_{53})$, $(b_{51},b_{53})$, $(a_{12},b_{22})$, $(a_{21},b_{21})$ (debido a que $[X,Y]=0$), $(a_{22},b_{12})$, $(a_{23},b_{34})$, $(a_{24},b_{24})$, $(a_{32},b_{32})$ (por ser la torsión nula), $(a_{34},b_{23})$, $(a_{35},b_{35})$,  $(a_{41}, b_{41})$, $(a_{14},b_{42})$, $(a_{42}, b_{14})$.
+
+
+El tensor de curvatura $\widetilde R(X,Y,Z)$ queda entonces reducido a
+\begin{equation*}
+\begin{split}
+\nabla_X \nabla_Y Z+ \nabla_YZ(f) \cdot X - Y(f) \escalar{X}{Z} \nabla f- \escalar{Y}{Z} \nabla_X \nabla f \\
++ XZ(f) \cdot Y + Z(f) Y(f) X - \escalar{Y}{Z} \abs{\nabla f}^2 X \\
+- \nabla_Y \nabla_X Z - \nabla_X Z(f) \cdot Y + X(f)\escalar{Y}{Z} \nabla f + \escalar{X}{Z} \nabla_X\nabla f \\
+- YZ(f) \cdot X - Z(f) X(f) \cdot Y + \escalar{X}{Z}\abs{\nabla f}^2 \cdot Y
+\end{split}
+\end{equation*}
+Los términos $11$ y $31$ dan lugar al tensor de curvatura.  Los  términos $12$ y $41$ dan lugar el \index{hessiano}{\sf hessiano}\footnote{El hessiano de $f$ es la forma simétrica de segundo grado $\nabla^2f$.  Teniendo en cuenta la definición de derivada covariante
+$$(\nabla^2 f)(X,Y)= \nabla_Y (\nabla f)(X) = Y(\nabla f(X))- \nabla f(\nabla_Y X)= YX(f)- \nabla_Y X(f)
+$$
+El hessiano de $f$ coincide también con $\nabla (df)$.} de $f$.  Sacando factor común en otros términos se obtiene
+\begin{equation*}
+\begin{split}
+R(X,Y,Z)- \nabla^2f(Y,Z) \cdot X + \nabla^2f(X,Z) \cdot Y \\
++ Z(f)\big(Y(f)\cdot  X -X(f) \cdot Y\big) + \big(X(f)\escalar{Y}{Z}-Y(f)\escalar{X}{Z}\big) \nabla f \\
++ \abs{\nabla f}^2\big(\escalar{X}{Z} \cdot Y - \escalar{Y}{Z} \cdot X\big) + \big( \escalar{X}{Z} - \escalar{Y}{Z}\big) \nabla_Y \nabla f
+\end{split}
+\end{equation*}
+
+Para construir el tensor de tipo $(4,0)$ debemos hacer producto escalar con un campo $A$.  Para ello utilizaremos la métrica $g$
+\begin{equation*}
+\begin{split}
+R(X,Y,Z,A)- \nabla^2f(X,Z)\escalar{X}{A} + \nabla^2f(X,Z)\escalar{Y}{A} \\
++Z(f) Y(f) \escalar{X}{A}\! -\! Z(f) X(f) \escalar{Y}{A} +X(f)A(f)\escalar{Y}{Z}\! - \!Y(f)A(f) \escalar{X}{Z}  \\
++ \abs{\nabla f}^2 \big( \escalar{X}{Z}\escalar{Y}{A} - \escalar{Y}{Z}\escalar{X}{A}\big)\\
+ + \escalar{X}{Z} \escalar{\nabla_Y \nabla f}{A} - \escalar{Y}{A}\escalar{\nabla_Y \nabla f}{A}
+\end{split}
+\end{equation*}
+Los elementos de la fila $2$ son justamente el producto de Kulkarni de $df \otimes df$ con $g$ (salvo un signo).  Los términos $12$, $13$, $41$ y $42$  equivalen al producto de Kulkarni del hessiano de f con el producto escalar $g$.
+
+\enlargethispage{2 cm}
+Finalmente tenemos la fórmula
+\begin{equation*}
+(R + (\nabla^2 f \kulkarni g)- (df \otimes df)\kulkarni g + \frac{1}{2} \abs{df}^2 g \kulkarni g )(X, Y, Z,A)
+\end{equation*}
+
+\smallskip
+
+Recordemos que esta expresión es equivalente a 
+$$
+\langle\widetilde R(X, Y,Z),A\rangle= e^{-2f} \widetilde g(R(X,Y,Z), A)= e^{-2f}\widetilde R (X, Y, Z, A)
+$$
+y obtenemos el factor de proporcionalidad que nos faltaba en la expresión. \fin
+
+
+
+
+
+
+
+
+Punto a punto las métricas $g $ y $\widetilde g$ son proporcionales.  Las métricas inducidas en los espacios de tensores también son proporcionales y el concepto de ortogonalidad es el mismo en ambas métricas.
+
+Si denotamos por $\phi_g$ la aplicación $\phi_g(h)= g \kulkarni h$
+y por $\phi_{\widetilde g}$, se tiene que 
+$$
+\phi_{\widetilde g}= e^{2f} \phi_g
+$$
+Ambas aplicaciones tienen el mismo subespacio imagen debido nuevamente a que las métricas son proporcionales.  
+
+\begin{propo}[\normalfont \cite{lafcon} pág. 71]\label{propo:tensordeweyl}
+
+El tensor de Weyl se transforma en un cambio conforme como
+$$
+\widetilde W = e^{2f} W
+$$
+y el tensor de Schouten
+$$
+\widetilde h= h +\nabla^2 f - df \otimes df + \frac{1}{2} \abs{df}^2 \cdot g
+$$
+
+\end{propo}
+
+
+
+\dem
+
+Utilizando el resultado del teorema anterior
+\begin{equation*}
+\begin{split}
+\widetilde R = e^{2f}\big( \phi_g(h)+ W + \phi_g(\nabla^2f- df \otimes df + \frac{1}{2}\abs{df}^2 \cdot g)\big) =\\
+e^{2f} W + e^{2f} \phi_g(h)  + e^{2f}\phi_g(\nabla^2 f- df \otimes df + \frac{1}{2}\abs{df}^2 \cdot g\big)= \\
+e^{2f} W + \phi_{\widetilde g} (h + \nabla^2 f-df \otimes df + \frac{1}{2} \abs{df}^2\cdot g \big)
+\end{split}
+\end{equation*}
+
+Comparando con la descomposición $\widetilde R= \widetilde W+ \phi_{\widetilde g}(\widetilde h)$ obtenemos
+\begin{eqnarray*}
+\widetilde W &=& e^{2f} W \\
+\widetilde h &=& h + \nabla^2 f - df \otimes df +\frac{1}{2} \abs{df}^2 \cdot g
+\end{eqnarray*}
+que es lo que pretendíamos demostrar. \fin
+
+\noindent{\bf Observación.}
+
+\smallskip
+
+  El factor $e^{2f} $ que aparece en los tensores de tipo $(4,0)$ desaparece en los tensores de tipo $(3,1)$. Entendido como tensor de tipo $(3,1)$ se tiene que $\widetilde W=W$.
+
+
+
+\section{Métricas planas y tensor de curvatura}
+
+\begin{defi}
+
+Una variedad  es \index{variedad!plana} {\sf plana} si su tensor de curvatura es nulo.
+
+\end{defi}
+
+\noindent{\bf Ejemplos.}
+
+\begin{itemize}
+
+\item El espacio euclídeo $\R^n$ es el ejemplo más claro de variedad plana. Todo abierto de un espacio euclídeo es también una variedad plana.
+
+\item En $\R^2$ se consideran dos vectores $e_1$, $e_2$ no proporcionales.  Dichos vectores generan un grupo abeliano
+$$
+\Z e_1 \times \Z e_2 = \{ne_1+me_2 \text{ con } n,m \in \Z \}
+$$
+Hacemos el cociente del grupo $\R^2$ por este grupo e introducimos en dicho conjunto de clases la estructura de variedad cociente.  Topológicamente la variedad obtenida es un toro bidimensional que denotamos $T^2$.  La aplicación canónica $\pi: \R^2 \rightarrow T^2$ nos permite definir una estructura riemanniana~$g'$ proyectando la métrica euclídea.  Dicha métrica es la única que cumple $\pi^*(g')=g$, siendo $g$ la métrica euclídea.  La variedad riemanniana que hemos construido es plana.  Este ejemplo se generaliza a cualquier número de dimensiones.
+
+\item El producto de dos variedades planas es otra variedad plana.
+
+\end{itemize}
+
+\begin{defi}
+
+Decimos una variedad es \index{variedad!localmente euclídea} {\sf localmente euclídea} si todo punto es isométrico a un punto de un espacio euclídeo.
+
+\end{defi}
+
+La isometría local entre un entorno de $p$ y un abierto del espacio euclídeo da lugar a un sistema de coordenadas.  En dichas coordenadas locales la métrica se reduce a la forma canónica
+$$
+g= dx_i \otimes dx_i
+$$
+Del mismo modo, si $p$ tiene unas coordenadas donde la métrica se reduce a la forma canónica, el difeomorfismo que proporciona el sistema coordenado es una isometría local con un abierto de un  espacio euclídeo.  Hemos demostrado la
+
+\begin{propo}
+
+Una variedad es localmente euclídea si y solo si  todo punto posee unas coordenadas en las que la métrica se reduce a su forma canónica.
+
+\end{propo}
+
+En realidad todos los conceptos anteriores son equivalentes.
+
+\begin{teo}[\normalfont \cite{leerie} pág. 119]
+
+Una variedad es localmente euclídea si y solo si es plana.
+
+\end{teo}
+
+
+\dem
+
+Dada una métrica en coordenadas, se pueden calcular los símbolos de Cristoffel en dichas coordenadas y con ellos el tensor de curvatura.  Los símbolos de Cristoffel se calculan a través de derivadas de la métrica.  La fórmula exacta es
+$$
+\Gamma_{ij}^k= \frac{1}{2}g^{kl}( g_{il,i}+g_{il,j}-g_{ij,l})
+$$
+Los símbolos de Cristoffel en estas coordenadas son nulos puesto que los componentes de la métrica son constantes.  Deducimos que el tensor de curvatura es nulo en estas coordenadas y por lo tanto debe ser identicamente nulo.
+
+\smallskip
+
+Sea $p$ un punto de $\V$ y $\{x_i\}$ un sistema de coordenadas, de tal forma que las coordenadas del punto $p$ sean $(0,0, \dots, 0)$.  Supondremos, para simplificar los cálculos, que el dominio de estas coordenadas es un cubo centrado en el origen.  Denotamos por $\{e_i\}$ los vectores coordenados en el punto $p$.  Podemos suponer, si es necesario tomando otras coordenadas, que los vectores $\{e_i\}$ forman una base ortonormal del espacio tangente.
+
+Dado un vector cualquiera $e \in T_p(\V)$ veamos como se puede construir un campo vectorial definido en todo el dominio coordenado y que en $p$ coincide con~$e$.  El eje $x_1$ lo podemos considerar como una curva en la variedad, que además contiene al punto $p$.  Teniendo un vector en una curva, por traslado paralelo, se puede construir un campo sobre dicha curva que extiende a $e$.  Denotamos dicho campo por $E$.  Consideramos ahora la curva asociada al eje $x_2$ y todas las paralelas a dicha curva.  Cada una de estas curvas intersecta al eje $x_1$ en un punto.  De nuevo por traslado paralelo se puede extender el campo $E$ a un campo definido en la superficie coordenada $(x_1,x_2)$.  Siguiendo con las demás coordenadas, y teniendo en cuenta que el sistema de coordenas es un cubo, construimos un campo definido en todo el dominio coordenado.  Como los campos obtenidos por traslado paralelo son diferenciables, el campo $E$ es diferenciable.
+
+Denotemos por $E_i$ el campo obtenido a partir del vector $e_i$.  Como el traslado paralelo es una isometría, los campos $\{E_i\}$ forman una base ortonormal en todo punto, puesto que forman una referencia  ortonormal en $p$.
+
+Todo lo dicho hasta ahora es válido independientemente de que $R$ sea nulo o no.  Dadas unas coordenadas,  dicha construcción es siempre posible. 
+
+\smallskip
+
+ Para que los campos $\{E_i\}$ formen un sistema coordenado, deben de conmutar entre si. Demostremos primeramente que el campo $E$ obtenido es paralelo si $R=0$.  Para comprobar este hecho basta demostrar que $\nabla_{\partial_i} E=0$ para todo campo coordenado.
+
+Es claro que $\nabla_{\partial_1} E=0$ en el eje $x_1$.  Del mismo modo $\nabla_{\partial_2}E =0$ en la superficie $(x_1,x_2)$ y en general $\nabla_{\partial_k}E=0$ en la  \guillemotleft subvariedad\guillemotright \  $(x_1, \dots, x_k)$.  Denotemos por $M_k$ a la subvariedad $(x_1, \dots, x_k)$. Demostremos por indución sobre $k$ que 
+$$
+\nabla_{\partial_1} E = \dots = \nabla_{\partial_k}E = 0 \text{ en } M_k
+$$
+El caso $k=1$ es evidente por construcción.  Sea $i < k+1$. Por hipótesis de inducción $\nabla_{\partial_i} E= 0$ en $M_k$.  Como la curvatura es nula (y $[\partial_i, \partial_{k+1}]=0$)
+$$
+\nabla_{\partial_{k+1}} (\nabla_{\partial_i} E)= \nabla_{\partial_i}(\nabla_{\partial_{k+1}}E)= 0 \text{ en } M_{k+1}
+$$
+De esta manera el campo vectorial $\nabla_{\partial_i} E$ es paralelo a lo largo del eje $x_{k+1}$.  Pero como es nulo en $M_k$, existe un punto del eje $x_{k+1}$ donde el campo es nulo y necesariamente es nulo en eje $x_{k+1}$. Del mismo modo se razona en las curvas paralelas al eje $x_{k+1}$.  Podemos afirmar que $\nabla_{\partial_i}E$ es nulo en $M_{k+1}$.  Si hacemos $k=n$ observamos que el campo $E$  es paralelo.
+
+\smallskip
+
+
+Calculemos el conmutador de dos campos $E_i$ utilizando que la torsión es nula.
+$$
+[E_i,E_j]= \nabla_{E_i}E_j-\nabla_{E_j}E_i =0
+$$
+Tenemos $n$ campos que conmutan.  El teorema de Frobenius nos asegura la existencia de un sistema de coordenadas $\{y_i\}$ en un entorno de $p$ tales que 
+$$
+E_i = \frac{\partial}{\partial y_i}
+$$
+  En estas coordenadas se tiene
+$$
+g_{ij}= g\bigg(\frac{\partial}{\partial y_i},\frac{\partial}{\partial y_j}\bigg) = g(E_i,E_j)=\delta_{ij}
+$$
+y el espacio es localmente euclídeo. \fin
+
+
+\noindent{\bf Observación 1.}
+
+\smallskip
+
+Hemos visto que la condición de ser localmente plano se refleja en cierta propiedad del tensor de curvatura. La demostración de la implicación directa (localmente plano $\Rightarrow$ curvatura nula) es fundamentalmente una demostración por derivación.  La implicación inversa y la construcción del sistema de coordenadas es una demostración de tipo integral y emplea el teorema de Frobenius. Además debemos hacer notar que la demostración es de tipo local: a pesar de que el tensor de curvatura sea globalmente nulo, solamente podemos encontrar un sistema de coordenadas en un entorno de cada punto.
+
+\bigskip
+
+\noindent{\bf Observación 2.}
+
+\smallskip
+
+Para extender el vector $e \in T_p(\V)$ a un campo $E$ definido en un entorno de~$p$, hemos hecho uso de un sistema de coordenadas. En el caso de que el tensor de curvatura sea nulo, no es dificil demostrar que la construcción no depende de las coordenada elegidas, pues el traslado paralelo entre dos puntos de una variedad plana 	simplemente conexa es independiente del camino seguido.  En el caso de que la curvatura no sea nula, la construcción que hemos realizado si depende de las coordenadas tomadas y no es intrínseca.
+
+Existe un modo independiente de las coordenadas de extender un vector. Consideramos un entorno convexo de~$p$.  Cualquier otro punto de dicho entorno se une con $p$ a través de una única geodésica.  Tomamos ese camino para trasladar paralelamente el vector $e$ y obtener de este modo un campo definido en todo el entorno. El campo así obtenido es diferenciable.
+
+
+\section{Métricas conformemente planas}
+
+Una métrica $g$ es equivalente a una métrica plana $\widetilde g$ si $[g]= [\widetilde g]$. El análogo local se da en la 
+
+\begin{defi}
+
+Una métrica $g$ es \index{métrica!conformemente plana} {\sf conformemente plana} si todo punto tiene un entorno donde $g$ es equivalente a una métrica plana.
+
+\end{defi}
+
+En un entorno de cada punto existe una función $f$ de tal forma que $e^{2f}g$ es euclídea en dicho entorno.  La función $f$ en general no está definida globalmente.
+
+Si tomamos coordenadas locales $\{x_i\}$ en el entorno, se tiene que
+$$
+e^{2f}g= dx_i \otimes dx_i
+$$
+En estas coordenadas la métrica $g$ tiene una matriz diagonal, donde los elementos de la diagonal son todos iguales. El recíproco es igualmente cierto.
+
+\bigskip
+
+\noindent{\bf Observación.}
+
+\smallskip
+
+Todas las variedades de dimensión $2$ son conformente planas, tal como demostró Gauss\footnote{Gauss demostró este teorema en el caso de las variedades analíticas haciendo uso de técnicas de variable compleja.  Casi un siglo después se relizo la demostración en el caso diferenciable (ver el comentario en \cite{lafcon} pág. 72).}.  Por ello supondremos implícitamente en esta sección que tratamos con variedades de dimensión mayor o igual a tres.
+
+
+\begin{propo}[Teorema de Weyl]
+
+Si $g$ es conformemente plana su tensor de Weyl es nulo.
+
+\end{propo}
+
+\dem
+
+En un entorno de cada punto existe $f$ tal que $e^{2f}g= \widetilde g$, siendo $\widetilde g$ euclídea. Por la proposición \ref{propo:tensordeweyl} tenemos que  $e^{2f}W = \widetilde W$, que es nulo.  Como el tensor de Weyl es nulo localmente también lo es globalmente. \fin
+
+
+
+\begin{defi}
+
+Llamamos {\sf tensor de Weyl-Schouten} \index{tensor!de Weyl-Schouten} a
+$$
+\WS(X,Y,Z)= (\nabla_X h)(Y,Z)-(\nabla_Yh)(X,Z)
+$$ 
+siendo $h$ el tensor de Schouten.
+
+\end{defi}
+
+\newpage
+
+\noindent{\bf Propiedades.}
+
+\begin{itemize}
+
+\item  $\WS$ es lineal en cada variable y además es antisimétrico en las dos primeras
+$$
+\WS(X,Y,Z)= -\WS(Y,X,Z)
+$$
+
+\item También se puede expresar el tensor de Weyl-Schouten como
+$$
+\WS(X,Y,Z)= \nabla h(Y,Z,X)- \nabla h(X,Z,Y)
+$$
+Se calcula la derevada covariante de $h$ y se antisimetriza (aunque solo en dos variables).
+
+\item En coordenadas el tensor de Weyl-Schouten se expresa como
+$$
+\WS_{ijk}= \WS(\partial_i,\partial_j,\partial_k)=h_{jk;i}-h_{ik;j}
+$$
+El tensor de Schouten puede expresarse en función del tensor de Ricci y de la curvatura escalar.  Ambos dependen de las derivadas primeras y segundas de la métrica.  El tensor de Weyl-Schouten hace intervenir hasta las derivadas terceras de la métrica.
+
+\item
+  
+Si $g$ es conformemente plana, por la proposición \ref{propo:tensordeweyl}, todo punto tiene un entorno donde se cumple
+$$
+h+\nabla(df)-df \otimes df + \frac{1}{2} \abs{df}^2 g=0
+$$
+El tensor de Schouten depende de las derivadas primeras y segundas de $f$.  El tensor de Weyl-Schouten depende nuevamente  también de las derivadas terceras.
+
+\end{itemize}
+
+En el caso de las métricas conformemente planas, si denotamos por $\omega$ a $df$, el tensor de Schouten cumple la ecuación \setcounter{equation}{0}
+\begin{equation}\label{equation:1}
+h=-\nabla \omega+ \omega \otimes \omega - \frac{1}{2}\abs{\omega}^2g
+\end{equation}
+Si hacemos actuar la expresión anterior sobre un par de campos $(X, Y)$, teniendo en cuenta que $\nabla \omega (X,Y)= (\nabla_Y\omega) (X)$, obtenemos
+\begin{equation}\label{equation:2}
+(\nabla_Y \omega)(X)= - h(X,Y)+ \omega(X)\omega(Y)- \frac{1}{2}\abs{\omega}^2 g(X,Y)
+\end{equation}
+expresión que es simétrica en $X$ e $Y$.
+  
+\begin{teo}[\normalfont \cite{lafcon}, pág. 73]
+
+ Si $g$ es conformemente plana, $\WS=0$. 
+ 
+ \end{teo}
+ 
+ \dem
+ 
+ Utilizando la expresión (\ref{equation:1}), el tensor de Weyl-Schouten se expresa como
+ $$
+ \nabla_X(-\nabla \omega + \omega \otimes \omega -\frac{1}{2}\abs{\omega}^2g)(Y,Z) - \nabla_Y (-\nabla \omega + \omega \otimes \omega -\frac{1}{2}\abs{\omega}^2g)(X,Z)
+ $$
+Desarrollamos la expresión
+\begin{equation*}
+\begin{split}
+-(\nabla_X\nabla \omega)(Y,Z) + (\nabla_X\omega)(Y) \omega(Z)+ \omega(Y)(\nabla_X\omega)(Z)- g(\omega,\nabla_X \omega)g(Y,Z) \\
++(\nabla_Y \nabla \omega) (X,Z)- (\nabla_Y\omega)(X)\omega(Z)- \omega(X)(\nabla_Y\omega)(Z)+g(\omega, \nabla_Y \omega)g(X,Z)
+\end{split}
+\end{equation*}
+Los términos $12$ y $22$ se anulan debido a la simetría anteriormente comentada.  Si escribimos el término $11$ en la forma $\nabla^2\omega(Y,Z,X)$, observamos que este término junto con el $21$ dan lugar al tensor de curvatura $R(X,Y,Z, \omega)$ (véase la proposición \ref{propo:derivadasegunda}).  Para analizar los otros cuatro términos utilizamos la fórmula~(\ref{equation:2}).
+\begin{equation*}
+\begin{split}
+\omega(Y)\big( -h(X,Z)+ \omega(X)\omega(Z)- \frac{1}{2} \abs{\omega}^2g(X,Z)\big) \\
+-g(Y,Z)\big( -h(X, \omega)+ \omega(\omega) \omega(X)- \frac{1}{2} \abs{\omega}^2 g(X, \omega)\big)\\
+-\omega(X)\big(-h(Y,Z)+ \omega(Y)\omega(Z)- \frac{1}{2}\abs{\omega}^2g(Y,Z)\big) \\
++g(X,Z)\big(-h(Y, \omega)+ \omega(\omega)\omega(Y) -\frac{1}{2} \abs{\omega}^2g(Y,\omega)\big)
+\end{split}
+\end{equation*}
+  
+  Desarrollamos nuevamente teniendo en mente que $g(X, \omega)= \omega(X)$ y que $\omega(\omega)= \abs{\omega}^2$.
+  \begin{equation*}
+  \begin{split}
+  -\omega(Y)h(X,Z)+ \omega(Y)\omega(X)\omega(Z)-\frac{1}{2} \abs{\omega}^2\omega(Y) g(X,Z) \\
++g(Y,Z) h(X, \omega)-g(Y,Z) \abs{\omega}^2 \omega(X)+ \frac{1}{2} \abs{\omega}^2 \omega(X) g(Y,Z) \\
++ \omega(X) h(Y,Z)- \omega(X) \omega(Y) \omega(Z)+ \frac{1}{2}\abs{\omega}^2 \omega(X) g(Y,Z) \\
+-g(X,Z) h(Y,\omega) + g(X,Z) \abs{\omega}^2 \omega(Y) -\frac{1}{2}\abs{\omega}^2 \omega(Y)g(X,Z)  
+\end{split}
+\end{equation*}  
+
+Los términos $12$ y $32$ se eliminan.  La terna $13$, $42$ y $43$ y la terna $22$, $23$ y $33$ también se eliminan.  Reescribiendo $\omega(Y)$ como $g(Y, \omega)$ la expresión queda
+$$
+-g(\omega,Y)h(X,Z)+ g(Y,Z)h(X, \omega)+g(X,\omega)h(Y,Z)-g(X,Z) h(Y,\omega)
+$$
+que es el producto de Kulkarni de $g$ y $h$ (salvo el signo).
+
+Resumiendo, tenemos que nuestra expresión es igual a 
+$$
+R(X,Y,Z,\omega)- (g \kulkarni h)(X,Y,Z, \omega)= W(X,Y,Z,\omega)
+$$  
+que es nulo. \fin
+
+La forma $\omega$ en realidad era $df$, que entendida como campo se puede expresar como un gradiente. En el caso de que $g$ sea conformemente plana, en un entorno de cada punto se cumple
+$$
+\WS(X,Y,Z) = W(X,Y,Z,\nabla f)
+$$
+siendo $f$ una función que  cumple que $e^{2f}g$ es plana. Según esta identidad la anulación del tensor de Weyl puede estar muy relacionada con la anulación del tensor de Weyl-Schouten.  Los detalles se dan en la próxima sección.
+
+\section{Métricas conformemente planas II}
+
+Si $h$ es un tensor simétrico de grado $q$, su derivada covariante, $\nabla h$, es un tensor de grado $q+1$, que no tiene necesariamente que ser simétrico.  Si a dicho tensor se le aplica el operador de simetrización podemos construir un operador
+$$
+\nabla_s :S^q(\V) \lto S^{q+1}(\V)
+$$
+Para cada punto $p$ de la variedad, el espacio de los tensores simétricos tiene una estructura de espacio euclídeo.  Tiene entonces sentido considerar la aplicación adjunta de~$\nabla_s$. La denotaremos por $div$
+$$
+div :S^{q+1}(\V) \lto S^q(\V)
+$$
+de tal forma que se cumpla en todos los puntos
+$$
+\escalar{\nabla_s h}{k}= \escalar{h}{div( k)} \text{ para todo } h\in S^q(\V), k \in S^{q+1}(\V)
+$$
+
+De esta manera se construye la divergencia en las variedades riemannianas.
+
+\bigskip
+
+  En el caso de formas de segundo grado, que son las que a nosotros nos interesan, esta construcción coincide con la
+
+\begin{defi}
+
+Dada una forma bilineal simétrica $h$,  su \index{divergencia} {\sf divergencia} es
+$$
+(div(h))(X)= -(\nabla_{e_i} h)(X,e_i)=- \nabla(h)(X,e_i,e_i)
+$$
+siendo $\{e_i\}$ una base ortonormal.
+
+\end{defi}
+
+
+\noindent{\bf Observación.}
+
+\smallskip
+
+La aparición del signo menos en la divergencia se debe al hecho de que $div$ es el operador adjunto de $\nabla_s$.  En muchos textos se adopta la definición cambiada de signo, que expresada en coordenadas parece más obvia.  Esta elección del signo no tiene nada que ver con el signo asignado al tensor de curvatura.
+
+\bigskip
+
+
+\noindent{\bf Ejemplos.}
+
+
+\begin{itemize}
+
+\item En general, para calcular la divergencia de un tensor de grado $k$ se procede del siguiente modo:  se calcula su derivada covariante, lo que aumenta en uno el grado del tensor y posteriormente se toman dos variables (en nuestro caso las dos últimas) y se calcula la traza respecto a ellas.  Esto baja en dos el grado del tensor quedando entonces la divergencia como un tensor de grado $k-1$.
+
+\item En una variedad orientada con elemento de volumen $\tau$ se puede definir siempre la divergencia de un campo $X$.  La derivada de Lie de la forma de volumen $\tau$ es también una forma de grado máximo y por lo tanto proporcional a $\tau$
+$$
+X^L(\tau)= f\cdot \tau
+$$
+La constante de proporcionalidad $f$ es, por definición, la divergencia del campo $X$. Esta definición es la que su utiliza habitualmente en el estudio del cálculo integral.  Debemos tener cuidado pues nuestra definición y ésta se diferencian en un signo.
+
+
+
+\item Tomemos una base ortonormal de campos $\{E_i\}$.  Respecto a esta base $h$ tendrá unas coordenadas $h_{ij}$. Calculemos las coordenadas de $div(h)$
+$$
+div(h)_j=div(h)(E_j)= -(\nabla_{E_i}h)(E_j,E_i)= -h_{ij;i}
+$$
+
+
+\item Sea $h = f \cdot g$ siendo $g$ la métrica euclídea
+\begin{equation*}
+\begin{split}
+div(f \cdot g)(X)= -\nabla_{e_i}(f \cdot g)(X,e_i)= -(\nabla_{e_i} f \cdot g)(X,e_i)= \\
+-df(e_i)g(X,e_i)=-df(e_i)X_i= -df(X)
+\end{split}
+\end{equation*}
+
+\item Partimos de la identidad de Bianchi diferencial
+$$
+\nabla_XR(Y,Z,A,B)+\nabla_YR(Z,X,A,B)+ \nabla_ZR(X,Y,A,B)=0
+$$
+Tomamos traza respecto a las variables impares
+$$
+\nabla_XR(e_i,Z,e_i,B)+\nabla_{e_i}R(Z,X,e_i,B)+ \nabla_ZR(X,e_i,e_i,B)=0
+$$
+y tomamos nuevamente traza respecto a las variables pares
+$$
+\nabla_XR(e_i,e_j,e_i,e_j)+\nabla_{e_i}R(e_j,X,e_i,e_j)+ \nabla_{e_j}R(X,e_i,e_i,e_j)=0
+$$
+El primero de los sumando es la curvatura escalar salvo un signo. Los dos últimos sumandos son iguales (tener en cuenta las simetrías del tensor de curvatura), diferenciandose únicamente en el subíndice empleado para sumar.  Obtenemos entonces
+$$
+-\nabla X(s)+ \nabla_{e_i}(Ric(X,e_i)+\nabla_{e_j}(Ric (X,e_j)=0
+$$
+Debido a nuestra definición de divergencia y eliminando $X$ obtenemos
+$$
+-ds-2\cdot div(Ric)=0
+$$
+que se suele escribir como
+$$
+div(Ric)= -\frac{1}{2} ds
+$$
+Esta igualdad se denomina \index{identidad!de Bianchi contraida}{\sf identidad de Bianchi contraida} (consultar \cite{leerie} pág. 124 para una demostración en coordenadas de esta identidad).
+
+\item El cálculo de divergencias se realiza con mucha facilidad utilizando bases de campos ortonormales.  En general dichos campos no conmutan y no forman un sistema de coordenadas (a menos que la variedad sea localmente plana).
+
+
+\end{itemize}
+
+\begin{lema}[\normalfont \cite{lafcon}, pág. 75]
+
+Si $h$ es el tensor de Schouten  se tiene
+$$
+div(h)+ d(\traza(h))=0
+$$
+
+\end{lema}
+
+\dem
+
+Expresamos el tensor de curvatura con ayuda del producto de Kulkarni
+$$
+R= h \kulkarni g+ W
+$$
+Si realizamos una contracción obtenemos
+$$
+c(R)=Ric= (2-n) h- \traza(h) \cdot g
+$$
+y si realizamos otra
+$$
+s= (2-n) \traza(h)- n \traza(h)= (2-2n)\traza(h)
+$$
+En la fórmula que da el tensor de Ricci tomamos divergencias
+$$
+div(Ric)= (2-n)div(h)+  d(\traza(h))
+$$
+Utilizamos la identidad de Bianchi contraida y la relación entre la curvatura escalar y la traza de $h$
+$$
+-\frac{1}{2}d(s)=(n-1) d(\traza (h))=(2-n) div(h)+d(\traza (h))
+$$
+que implica
+$$
+d(\traza (h))=-div(h)
+$$
+que es lo que pretendíamos demostrar. \fin
+
+\begin{cor}
+
+El tensor de Weyl-Schouten tiene traza nula. En fórmulas
+$$
+(\WS)(e_i,X,e_i)=0
+$$
+
+\end{cor}
+
+\dem
+
+Directamente
+$$
+\WS(e_i,X,e_i)= (\nabla_{e_i}h)(X,e_i)-(\nabla_Xh)(e_i,e_i)= -div(h)(X)-d(\traza(h))(X)
+$$
+y queda probado. \fin
+
+\begin{propo}[\normalfont \cite{lafcon}, pág. 75]\label{propo:anulacion}
+
+Si $n \geq 4$ entonces $W=0$ implica  $\WS=0$.
+
+\end{propo}
+
+\dem
+
+Si $W=0$ podemos escribir el tensor de curvatura como $R= g  \kulkarni h$.
+Como el producto de Kulkarni es bilineal, se deriva aplicando la regla de Leibniz
+$$
+\nabla_X R= \nabla_X h \kulkarni g + h \nabla_X g= \nabla_X h\kulkarni g
+$$
+Aplicamos este resultado a un conjunto de vectores
+\begin{equation*}
+\begin{split}
+\nabla_XR(Y,Z,A,B)= \nabla_Xh(Y,A)g(Z,B)+\nabla_Xh(Z,B)g(Y,A)\\
+-\nabla_Xh(Y,B)g(Z,A)-\nabla_Xh(Z,A)g(Y,B)
+\end{split}
+\end{equation*}
+Podemos utilizar esta fórmula para sustituir en la identidad  de Bianchi diferencial.
+\begin{equation*}
+\begin{split}
+0=\nabla_Xh(Y,A)g(Z,B)+\nabla_Xh(Z,B)g(Y,A)\\
+-\nabla_Xh(Y,B)g(Z,A)-\nabla_Xh(Z,A)g(Y,B)\\
++\nabla_Yh(Z,A)g(X,B)+\nabla_Yh(X,B)g(Z,A)\\
+-\nabla_Yh(Z,B)g(X,A)-\nabla_Yh(X,A)g(Z,B)\\
++\nabla_Zh(X,A)g(Y,B)+\nabla_Zh(Y,B)g(X,A)\\
+-\nabla_Zh(X,B)g(Y,A)-\nabla_Zh(Y,A)g(X,B)
+\end{split}
+\end{equation*}
+Si sacamos factor común aparece el tensor de Weyl-Schouten
+\begin{equation*}
+\begin{split}
+0=g(Z,B)\WS(X,Y,A)+g(Y,A)\WS(X,Z,B) \\
++g(Z,A)\WS(Y,X,B)+g(Y,B)\WS(Z,X,A) \\
++g(X,B)\WS(Y,Z,A)+g(X,A)\WS(Z,Y,B)
+\end{split}
+\end{equation*}
+Tomamos traza respecto a $X$ y $B$
+\begin{equation*}
+\begin{split}
+0=g(Z,e_i)\WS(e_i,Y,A)+g(Y,A)\WS(e_i,Z,e_i) \\
+-g(Z,A)\WS(Y,e_i,e_i)-g(Y,e_i)\WS(Z,e_i,A) \\
++g(e_i,e_i)\WS(Y,Z,A)-g(e_i,A)\WS(Z,Y,e_i)
+\end{split}
+\end{equation*}
+y obtenemos
+\begin{equation*}
+\begin{split}
+\WS(Z,Y,A) 
++\WS(Z,Y,A)
++n\WS(Y,Z,A)+\WS(Z,Y,A)=\\
+(n-3)\WS(Y,Z,A)=0
+\end{split}
+\end{equation*}
+para toda terna de vectores. \fin
+
+\noindent{\bf Observación.}
+
+\smallskip
+
+En la demostración se observa  la necesidad de que $n \geq 4$.  El resultado en dimensión tres es falso, puesto que existen variedades donde $\WS\neq 0$ y sin embargo siempre se tiene que $W=0$.
+
+
+\section{Teorema de Weyl-Schouten}\label{section:weyl-schouten}
+
+Una métrica conformente plana tiene tensor de Weyl nulo.  Recíprocamente, si el tensor de Weyl es nulo, la métrica es conformemente plana si existe un cambio conforme que anule el tensor de Schouten. Para ello debemos encontrar una función $f$, definida localmente, que cumpla la ecuación
+$$
+h+\nabla(df)-df \otimes df + \frac{1}{2} \abs{df}^2 g=0
+$$
+
+\begin{lema}
+
+La ecuación anterior tiene solución si y solo si existe una forma diferencial $\omega $ que verifique
+$$
+h+\nabla \omega- \omega \otimes \omega + \frac{1}{2}\abs{\omega}^2g=0
+$$
+
+
+\end{lema}
+
+\dem
+
+La implicación directa es evidente, tomando $\omega=df$. 
+
+\smallskip
+
+ Para la recíproca basta ver que la forma $\omega$ es cerrada, puesto que aplicando el lema de Poincaré existe localmente $f$ que cumple $\omega=df$.   Aplicamos la identidad anterior a una pareja de campos
+ $$
+ h(X,Y)+\nabla_Y\omega(X)-\omega(X)\omega(Y)+ \frac{1}{2}\abs{\omega}^2g(X,Y)=0
+ $$
+ que es una expresión simétrica en $X$ e $Y$. Si utilizamos la definición de derivada covariante de una forma de grado uno y despejamos
+ $$
+Y(\omega(X))-\omega(\nabla_YX)=-h(X,Y)-\omega(X)\omega(Y)+\frac{1}{2} \abs{\omega}^2g(X,Y)
+$$
+Si intercambiamos $X$ e $Y$ y restamos, en la parte derecha se obtiene cero, por la simetría.  Utilizando ahora que la torsión es nula, en la parte izquierda nos queda
+$$
+Y(\omega(X))-X(\omega(Y))-\omega([X,Y])
+$$
+que es justamente $d\omega(X,Y)$.\fin
+
+\noindent{\bf Observación.}
+
+\smallskip
+
+No es díficil demostrar que $d \omega$ es la parte antisimétrica del tensor $\nabla \omega$, siendo este resultado válido para toda $k$-forma diferencial. El resultado es  independiente de la métrica riemanniana utilizada.  En nuestro caso $\nabla \omega$ es simétrica, lo que implica directamente que $\omega$ es cerrada.
+
+\bigskip
+ 
+ 
+Una forma diferencial de primer grado se puede entender como una sección del fibrado cotangente.  La imagen de dicha sección es una subvariedad de dimensión $n$ del fibrado cotangente. Recíprocamente, si tenemos una subvariedad de dimensión $n$ en el fibrado cotangente que se proyecte difeomorficamente por $\pi$, podemos reconstruir la sección y con ello la forma diferencial.  Si el difeomorfismo es solamente local, lo único que podemos hacer es construir formas diferenciales locales.  Nosotros entenderemos la forma diferencial como una subvariedad del fibrado cotangente y las condiciones del lema anterior se convertirán en ciertas condiciones para la subvariedad
+
+
+ Como nuestro problema es local, podemos emplear coordenadas.  Dadas unas coordenadas $\{x_i\}$ en la variedad, se inducen unas coordenadas canónicas $\{x_i,p_i\}$ en el fibrado cotangente.  Estas serán las que emplearemos en nuestro estudio.
+ 
+  Aplicamos la identidad del lema anterior sobre una pareja de campos coordenados
+ $$
+(h+\nabla \omega- \omega \otimes \omega + \frac{1}{2}\abs{\omega}^2g)\left(\partial_i, \partial_j \right)=0
+$$
+Si escribimos nuestra forma diferencial localmente como $\omega= \omega_i dx_i$ esta ecuación se transforma en el siguiente sistema de ecuaciones
+$$
+h_{ij}+ \partial_j \omega_i-\Gamma_{ij}^k\omega_k- \omega_i\omega_j+ \frac{1}{2}\abs{\omega}^2g_{ij}=0
+$$
+Reescribimos esta condición en la forma
+$$
+\partial_j \omega_i=-h_{ij}+ \Gamma_{ij}^k\omega_k+ \omega_i\omega_j- \frac{1}{2}\abs{\omega}^2g_{ij}=0
+$$
+que es la expresión en coordenadas de un sistema diferencial exterior que fija las condiciones que debe satisfacer la \guillemotleft subvariedad\guillemotright \  $\omega$.  La existencia local de soluciones de este sistema las da el teorema de Frobenius.  Las condiciones de integrabilidad de Frobenius, expresadas en coordenadas son (\cite{aubsom} pág 118)
+$$
+\partial_k F_{ij}+\frac{\partial F_{ij}}{\partial \omega_l} F_{kl}= 
+\partial_i F_{kj}+ \frac{\partial F_{kj}}{\partial \omega_l} F_{il}
+$$
+donde hemos denotado por $F_{ij}$ a cada una de las ecuaciones
+$$
+F_{ij}= -h_{ij}+\Gamma_{ij}^k\omega_k+ \omega_i\omega_j- \frac{1}{2}\abs{\omega}^2g_{ij}
+$$
+Realizando los cálculos (ver el apéndice \ref{cuenta}) estas condiciones de integrabilidad son equivalentes a 
+$$
+W_{kij}^l\omega_l= \WS_{kij}
+$$
+En la parte derecha nos aparece una contracción del tensor de Weyl y en la parte derecha el tensor de Weyl-Schouten.
+
+\begin{teo}[Weyl-Schouten]
+
+En dimensión tres la condición necesaria y suficiente para que la métrica sea conformente plana es la anulación del tensor de Weyl-Schouten.  En dimensión mayor o igual a cuatro la condición necesaria y suficiente es la anulación del tensor de Weyl.
+
+\end{teo}
+
+\dem
+
+La necesidad de las condiciones está ya analizada.
+
+\smallskip
+
+En dimensión tres el tensor de Weyl es nulo.  Las condiciones de integrabilidad equivalen a que el tensor de Weyl-Schouten sea nulo.
+
+\smallskip
+
+En dimensión cuatro o superior hemos visto que la anulación del tensor de Weyl implica la anulación del tensor de Weyl-Schouten (proposición \ref{propo:anulacion}).  Se cumplen entonces las condiciones de integrabilidad. \fin
+
+ 
+ 
+\newpage
+
+\appendix
+
+
+
+\section{Cálculos del Teorema de Weyl-Schouten}\label{cuenta}
+
+Siguiendo las notaciones de  la sección \ref{section:weyl-schouten} 
+$$
+F_{ij}= -h_{ij}+\Gamma_{ij}^k\omega_k+ \omega_i\omega_j- \frac{1}{2}\abs{\omega}^2g_{ij}
+$$
+Escribimos esta función en coordenadas
+$$
+F_{ij}=-h_{ij}+\Gamma_{ij}^\alpha \omega_\alpha+\omega_i\omega_j -\frac{1}{2}g^{\alpha\beta}\omega_\alpha\omega_\beta g_{ij}
+$$
+Realizamos las operaciones indicadas en los criterios de integrabilidad 
+\begin{equation*}
+\begin{split}
+-\partial_k(h_{ij})+\partial_k(\Gamma_{ij}^\alpha)\omega_\alpha-\frac{1}{2}\partial_k(g^{\alpha \beta}) \omega_\alpha\omega_\beta g_{ij}-\frac{1}{2} \abs{\omega}^2 \partial_k(g_{ij})\\
++(\Gamma_{ij}^l+\delta_{il}\omega_j+\delta_{jl}\omega_i-\omega^lg_{ij})
+(-h_{kl}+\Gamma_{kl}^\alpha\omega_\alpha+ \omega_k\omega_l -\frac{1}{2}\abs{\omega}^2g_{kl})=\\
+-\partial_i(h_{kj})+\partial_i(\Gamma_{kj}^\alpha)\omega_\alpha-\frac{1}{2}\partial_i(g^{\alpha \beta}) \omega_\alpha\omega_\beta g_{kj}-\frac{1}{2} \abs{\omega}^2 \partial_i(g_{kj})\\
++(\Gamma_{kj}^l+\delta_{kl}\omega_j+\delta_{jl}\omega_k-\omega^lg_{kj})
+(-h_{il}+\Gamma_{il}^\alpha\omega_\alpha+ \omega_i\omega_l -\frac{1}{2}\abs{\omega}^2g_{ij})
+\end{split}
+\end{equation*}
+
+Desarrollamos los productos y obtenemos
+\begin{equation*}
+\begin{split}
+-\partial_k(h_{ij})+\partial_k(\Gamma_{ij}^\alpha)\omega_\alpha-\frac{1}{2}\partial_k(g^{\alpha \beta}) \omega_\alpha\omega_\beta g_{ij}-\frac{1}{2} \abs{\omega}^2 \partial_k(g_{ij})\\
+-\Gamma_{ij}^l h_{kl} +\Gamma_{ij}^l\Gamma_{kl}^\alpha \omega_\alpha+\Gamma_{ij}^l\omega_k\omega_l-\frac{1}{2}\Gamma_{ij}^l\abs{\omega}^2 g_{kl}\\
+-h_{ki}\omega_j +\Gamma_{ki}^\alpha \omega_\alpha\omega_j +\omega_k\omega_j\omega_i -\frac{1}{2}\abs{\omega}^2\omega_j g_{ki}\\
+-h_{kj}\omega_i +\Gamma_{kj}^\alpha\omega_\alpha\omega_i +\omega_k\omega_j\omega_i-\frac{1}{2}\abs{\omega}^2\omega_i g_{kj}\\
++h_{kl}\omega^lg_{ij}-\Gamma_{kl}^\alpha\omega_\alpha\omega^lg_{ij}-\omega^l\omega_k\omega_l g_{ij}+\frac{1}{2}\abs{\omega}^2\omega^lg_{kl}g_{ij}= \\
+-\partial_i(h_{kj})+\partial_i(\Gamma_{kj}^\alpha)\omega_\alpha-\frac{1}{2}\partial_i(g^{\alpha \beta}) \omega_\alpha\omega_\beta g_{kj}-\frac{1}{2} \abs{\omega}^2 \partial_i(g_{kj})\\
+-\Gamma_{kj}^l h_{il} +\Gamma_{kj}^l\Gamma_{il}^\alpha \omega_\alpha+\Gamma_{kj}^l\omega_i\omega_l-\frac{1}{2}\Gamma_{kj}^l\abs{\omega}^2 g_{il}\\
+-h_{ik}\omega_j +\Gamma_{ik}^\alpha \omega_\alpha\omega_j +\omega_i\omega_j\omega_k -\frac{1}{2}\abs{\omega}^2\omega_j g_{ik}\\
+-h_{ij}\omega_k +\Gamma_{ij}^\alpha\omega_\alpha\omega_k +\omega_i\omega_j\omega_k-\frac{1}{2}\abs{\omega}^2\omega_k g_{ij}\\
++h_{il}\omega^lg_{kj}-\Gamma_{il}^\alpha\omega_\alpha\omega^lg_{kj}-\omega^l\omega_i\omega_l g_{kj}+\frac{1}{2}\abs{\omega}^2\omega^lg_{il}g_{kj} 
+\end{split}
+\end{equation*}
+
+Se eliminan directamente las parejas $(a_{33},b_{33})$, $(a_{43},b_{43})$, $(a_{23},b_{42})$ y $(a_{42},b_{23})$. 
+
+Todos los objetos con dos subíndices son simétricos. Con este resultado conseguimos eliminar los pares  $(a_{31},b_{31})$, $(a_{34},b_{34})$ y $(a_{32},b_{32})$.
+
+ Teniendo en cuenta que $\omega^l \omega_l = \abs{\omega}^2$  las ternas $(a_{44},b_{53},b_{54})$ y $(a_{53},a_{54}, b_{44})$ son nulas.
+
+Concentrémonos en  los términos $a_{13},a_{14},a_{24},a_{52},b_{13},b_{14},b_{24},b_{52}$ 
+\begin{equation*}
+\begin{split}
+-\frac{1}{2}\partial_{k}(g^{\alpha\beta})\omega_\alpha\omega_\beta g_{ij}-\frac{1}{2} \abs{\omega}^2 \partial_k(g_{ij})-\frac{1}{2}\Gamma_{ij}^l\abs{\omega}^2 g_{kl}-\Gamma_{kl}^\alpha \omega_\alpha\omega^lg_{ij}=\\
+-\frac{1}{2}\partial_i(g^{\alpha\beta})\omega_\alpha\omega_\beta g_{kj}-\frac{1}{2} \abs{\omega}^2 \partial_i(g_{kj})-\frac{1}{2}\Gamma_{kj}^l\abs{\omega}^2 g_{il}-\Gamma_{il}^\alpha\omega_\alpha \omega^l g_{kj}
+\end{split}
+\end{equation*}
+Los desarrollamos utilizando que la derivada covariante del tensor métrico es nula. 
+\begin{equation*}
+\begin{split}
+\frac{1}{2} \Gamma_{k\theta}^\alpha g^{\theta\beta} \omega_\alpha\omega_\beta g_{ij}+ \frac{1}{2} \Gamma_{k \theta}^\beta g^{\theta \alpha} \omega_\alpha\omega_\beta g_{ij}\\
+-\frac{1}{2} \abs{\omega}^2 \Gamma_{ki}^\theta g_{\theta j}- \frac{1}{2}\abs{\omega}^2 \Gamma_{k j}^\theta g_{\theta i}\\
+ - \frac{1}{2}\Gamma_{ij}^l\abs{\omega}^2g_{kl}-\Gamma_{kl}^\alpha\omega_\alpha \omega^l g_{ij}=\\
+\frac{1}{2} \Gamma_{i\theta}^\alpha g^{\theta\beta} \omega_\alpha\omega_\beta g_{kj}+\frac{1}{2} \Gamma_{i \theta}^\beta g^{\theta \alpha} \omega_\alpha\omega_\beta g_{kj}\\
+-\frac{1}{2} \abs{\omega}^2 \Gamma_{ik}^\theta g_{\theta j}- \frac{1}{2}\abs{\omega}^2 \Gamma_{i j}^\theta g_{\theta k}\\
+ - \frac{1}{2}\Gamma_{kj}^l\abs{\omega}^2 g_{il}-\Gamma_{il}^\alpha \omega_\alpha \omega^l g_{kl}
+\end{split}
+\end{equation*}
+Si efectuamos la subida de índices que indica la operación anterior, observamos que todos los términos se cancelan, ya sea por ternas o por pares.
+
+Estudiemos ahora los términos $(a_{11},a_{21},b_{11},b_{22})$. Pasamos todo al segundo miembro. Podemos escribir estas operaciones en la forma
+$$
+\nabla_k(h_{ij})-\nabla_i(h_{kj})
+$$ 
+que no es más que la expresión del tensor de Weyl-Schouten en coordenadas. 
+
+Del mismo modo, operando con los términos $(a_{12},a_{22},b_{12},b_{22})$ y pasandolos al primer miembro, obtenemos la expresión en coordenadas del tensor de curvatura  
+$$
+R_{kij}^\alpha \omega_\alpha
+$$
+Finalmente nos queda por analizar el resultado de la operación (hemos pasado todo al primer miembro)
+$$
+-h_{kj}\omega_i + h_{kl}\omega^lg_{ij}+h_{ij}\omega_k-h_{il}\omega_lg_{kj}
+$$
+que podemos escribir también en la forma
+$$
+-h_{ij}g^l_i\omega_l +h_k^lg_{ij}\omega_l+h_{ij}g_k^l\omega_l-h_i^l g_{kj}\omega_l
+$$
+que es el producto de Kulkarni con un indice subido.  Finalmente hemos obtenido que nuestra  expresión se reduce a 
+$$
+(R_{kij}^l - (h \kulkarni g)_{kij}^l)\omega_l = \nabla_k(h_{ij})-\nabla_i(h_{kj})
+$$
+que es precisamente
+$$
+W_{kij}^l \omega_l = \WS_{kij}
+$$
+\newpage
+
+\section{Producto tensorial de álgebras}
+
+Los siguientes resultados están extraidos del capítulo IX de \cite{besgeo} debido a la pluma de A. Polombo.
+
+\bigskip
+
+Supondremos  que $E$ es un espacio euclídeo de dimensión finita,
+lo que nos permitirá identificar a $E$ con su dual, y en general a los
+tensores covariantes con los contravariantes. La potencias tensoriales de $E$ son nuevamente espacios euclídeos.
+
+\bigskip
+
+A cualquier espacio vectorial $E$ se le puede asociar su \index{álgebra!exterior}{\sf álgebra exterior}, 
+que denotaremos por $\Omega( E)$.  Si $E$ tiene dimensión $n$, entonces 
+$\Omega (E)$ tiene dimensión~$2^n$.  La descomposición en suma directa
+$$
+\textstyle \Omega( E)= \R \oplus E \oplus \bigwedge^2(E) \oplus \dots \oplus 
+\bigwedge^n(E)
+$$
+establece una graduación en el álgebra exterior.  Los elementos homogéneos 
+de este álgebra cumplen la ley conmutación.
+$$
+\omega_p \wedge \omega_q= (-1)^{pq}\,\omega_q \wedge \omega_p
+$$
+Decimos que $\Omega (E)$ es un \index{álgebra!graduada anticonmutativa}{\sf álgebra graduada 
+anticonmutativa}.
+
+\bigskip
+
+Construyamos ahora el \index{producto tensorial}{\sf producto tensorial} del álgebra $\Omega (E)$ consigo 
+misma.  Como espacio vectorial, el producto tensorial de álgebras coincide 
+con el producto tensorial de espacios vectoriales. 
+El  producto en este nuevo conjunto lo denotaremos mediante un punto.  Sobre 
+  los elementos descomponibles se define como
+$$
+(\omega_1 \otimes \omega_2) \cdot (\omega_3 \otimes \omega_4)= (\omega_1 
+\wedge \omega_3) \otimes (\omega_2 \wedge \omega_4)
+$$
+Para el resto de los elementos la definición se extiende por linealidad.  
+Este nuevo producto posee también una ley de conmutación:
+si $\tau \in \bigwedge^p E\otimes \bigwedge^q E$ y $\theta \in \bigwedge^r 
+E\otimes \bigwedge^s E$ entonces
+$$
+\tau \cdot \theta = (-1)^{pr+qs}\,\theta \cdot \tau
+$$
+Decimos que $\Omega( E) \otimes \Omega( E)$ es un \index{álgebra!bigraduada anticomutativa}{\sf álgebra bigraduada  
+anticonmutativa}.
+
+\bigskip
+
+Vamos a construir una subálgebra de $\Omega( E) \otimes \Omega( E)$.  Para 
+ello consideramos el espacio vectorial $\bigwedge^p E$.  El conjunto de 
+formas bilineales de este espacio vectorial se identifica con $\bigwedge^p E 
+\otimes \bigwedge^p E$ (recordar que $\bigwedge^p E$ es euclídeo), que es un subespacio del producto tensorial de 
+álgebras.  Si denotamos por $S^2(\bigwedge^p E)$ al conjunto de formas bilineales simétricas, tenemos que 
+$S^2(\bigwedge^p E) \subset \bigwedge^p E \otimes \bigwedge^p E$ y se puede 
+considerar inyectado en el producto tensorial de álgebras.  Cambiamos la 
+notación y escribimos
+$$
+\textstyle C^p(E)= S^2(\bigwedge^p E)
+$$
+Consideramos la suma directa
+$$
+C(E)=\R \oplus C^1(E) \oplus \dots \oplus C^n(E)
+$$
+que es un subespacio vectorial de $\Omega( E) \otimes \Omega( E)$.
+
+%\newpage
+
+\begin{propo}
+
+ $C(E)$ es una subálgebra conmutativa de $\Omega( E) \otimes \Omega( E)$.
+
+\end{propo}
+
+\dem
+
+Basta comprobar el resultado para elementos homogeneos.    Sea  $h \in C^p(E)$ y $k\in C^q(E)$.  Los elementos de la forma $\alpha_1 \circ \alpha_2$ (producto simétrico) con $\alpha_i \in \bigwedge^p (E)$ generan el espacio de las formas bilineales simétricas sobre  el espacio vectorial $\bigwedge^p(E)$.  Es decir, generan el espacio vectorial $C^p(E)$.  Por esto, sin pérdida de generalidad, podemos suponer que $h= \alpha_1 \circ \alpha_2$ y lo mismo con $k$. 
+\begin{equation*}
+\begin{split}
+(\alpha_1 \circ \alpha_2) \cdot (\beta_1 \circ \beta_2)= (\alpha_1 \otimes \alpha_2 + \alpha_2 \otimes \alpha_1) \cdot (\beta_1 \otimes \beta_2 + \beta_2 \otimes \beta_1)= \\
+(\alpha_1 \otimes \alpha_2) \cdot (\beta_1 \otimes \beta_2)+
+(\alpha_1 \otimes \alpha_2) \cdot (\beta_2 \otimes \beta_1)+\\
++(\alpha_2 \otimes \alpha_1) \cdot (\beta_1 \otimes \beta_2)+
+(\alpha_2 \otimes \alpha_1) \cdot (\beta_2 \otimes \beta_1)
+\end{split}
+\end{equation*}
+Aplicando la definición de producto  en $\Omega( E) \otimes \Omega( E)$
+\begin{equation*}
+\begin{split}
+(\alpha_1 \wedge \beta_1) \otimes (\alpha_2 \wedge \beta_2) +
+(\alpha_1 \wedge \beta_2) \otimes (\alpha_2 \wedge \beta_1) \\
++(\alpha_2 \wedge \beta_1) \otimes (\alpha_1 \wedge \beta_2) +
+(\alpha_2 \wedge \beta_2) \otimes (\alpha_1 \wedge \beta_1) 
+\end{split}
+\end{equation*}
+El sumando $3$ es el simétrico del sumando $1$ (entendidos como aplicaciones bilineales de $\bigwedge^{p+q}(E)$) y lo mismo con los sumandos $2$ y $4$. Por tanto la suma es una forma bilineal simétrica.
+
+\smallskip
+
+Como elementos de $\Omega( E) \otimes \Omega( E)$ tanto $h$ como $k$ son de grado par y la fórmula de conmutación nos da $h \cdot k=k \cdot h$.\fin
+
+\noindent{\bf Observación.}
+
+\smallskip
+
+$C(E)$ es un álgebra graduada, pero debemos tener cuidado pues la graduación no coincide con la graduación heredada de $\Omega( E) \otimes \Omega( E)$.
+
+\bigskip
+
+\begin{defi}
+
+El producto  restringido a $C(E)$ se denotá por $\kulkarni$ y se llama \index{producto de Kulkarni} {\sf producto de Kulkarni}.
+
+\end{defi}
+
+\noindent{\bf Ejemplos.}
+
+\begin{itemize}
+
+\item El tensor de curvatura $R$ es un elemento de $C^2(E)$, el tensor de Ricci es un elemento de $C^1(E)$ y la curvatura escalar es un elemento de $C^0(E)$.
+
+\item  El espacio de los tensores de curvatura algebraicos es un subespacio de $C^2(E)$ y en general no coincide con él.  Los tensores de curvatura algebraicos cumplen la identidad de Bianchi y los elementos de $C^2(E)$ no tiene porqué cumplirla.
+
+\item Si $h$ y $k$ son dos formas bilineales simétricas se tiene
+\begin{equation*}
+\begin{split}
+h \kulkarni k(x,y,z,a)= h(x,z)k(y,a)+h(y,a)k(x,z)\\
+-h(x,a)k(y,z)-h(y,z)k(x,a)
+\end{split}
+\end{equation*}
+
+\end{itemize}
+
+
+
+\newpage
+
+\section{Tensor de Weyl sin  representaciones}
+
+Hemos introducido el tensor de Weyl con ayuda de la teoría de representaciones y hemos comprobado que es invariante por cambios conformes.  Sin embargo este no es camino histórico que condujo a Weyl a la obtencion de su tensor. Weyl estudió los cambios que sufrían los objetos tras un cambio conforme e intento hallar una cantidad que se preservara en dichos cambios. Nuestra demostración es esencialmente equivalente a la que se encuentra en el libro de Eisenhart, pero la realizaremos sin utilizar coordenadas. Aprovecharemos también los recursos que nos proporciona el producto de Kulkarni.
+
+\bigskip
+
+Si llamamos $t$ al tensor 
+$$
+t= \nabla^2f-df \otimes df + \frac{1}{2}\abs{df}^2 g
+$$
+el cambio en el tensor de curvatura, según el teorema \ref{teo:cambiocurvatura}, se expresa como
+$$
+e^{-2f}\widetilde R = R + t \kulkarni g
+$$
+
+Para obtener el cambio en el tensor de Ricci y en la curvatura escalar debemos contraer esta expresión.  Como vamos a contraer con dos métricas, debemos tener en cuenta la relación entre ambas contracciones, que denotaremos $\widetilde c$ y $c$
+$$
+\widetilde c = e^{-2f} c
+$$
+
+Si contraemos una vez con la métrica $g$  obtenemos (proposición \ref{propo:contraccion})
+$$
+\widetilde {Ric} = Ric+(2-n)\cdot t -\mathrm{Tr}_g (t)\cdot g
+$$
+Si contraemos otra vez
+$$
+e^{2f}\widetilde s = s+(2-2n) \mathrm{Tr}_g (t)
+$$
+
+Despejamos la traza de $t$ en la expresión de la curvatura escalar  y lo sustituimos en la expresión del tensor de Ricci.  Todo lo relativo a métrica $\widetilde g$ lo pasamos a la izquierda.
+$$
+\widetilde {Ric}+ \frac{\widetilde s}{2-2n}\cdot \widetilde g = Ric + \frac{s}{2-2n}\cdot g + (2-n)\cdot t
+$$
+Dividiendo entre $2-n$
+$$
+\frac{1}{2-n}\left(\widetilde {Ric}+ \frac{\widetilde s}{2-2n} \cdot\widetilde g\right) =\frac{1}{2-n}\left( Ric + \frac{s}{2-2n} \cdot g \right)+ t
+$$
+Aparece  el tensor  de Schouten (ejemplos página \pageref{riccischouten}), que se transforma bajo un cambio de coordenadas como
+$$
+\widetilde h = h +t
+$$
+Despejamos $t$ y sustituimos en la ecuación del tensor de curvatura
+\begin{equation*}
+\begin{split}
+e^{-2f}\widetilde R = R + g \kulkarni(\widetilde h-h)=\\
+e^{-2f}\widetilde R- e^{-2f}\widetilde g \kulkarni \widetilde h = R- g \kulkarni h=\\
+e^{-2f}(\widetilde R-  \widetilde g \kulkarni \widetilde h) = R- g \kulkarni h=\\
+e^{-2f}\widetilde W = W
+\end{split}
+\end{equation*}
+y aparece el tensor de Weyl de orden $(4,0)$.
+
+
+
+\end{document}
+
